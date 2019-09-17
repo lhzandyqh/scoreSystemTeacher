@@ -1,9 +1,9 @@
 <template>
-<div class="app-container">
-  <el-row style="padding-top: 20px">
-    <div id="class" style="width:100%;height: 400px" />
-  </el-row>
-</div>
+  <div class="app-container">
+    <el-row style="padding-top: 20px">
+      <div id="class" style="width:100%;height: 400px" />
+    </el-row>
+  </div>
 </template>
 
 <script>

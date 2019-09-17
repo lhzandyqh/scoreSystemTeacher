@@ -3,22 +3,12 @@
     <el-row>
       <div class="selectContainer">
         <div class="shuoming">
-          <span style="font-weight: bolder">请选择科目及班级</span>
+          <span style="font-weight: bolder">请选择班级</span>
         </div>
         <div class="select">
-          <div class="select">
-            <el-select v-model="value" placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </div>
-          <el-select v-model="subjectValue" placeholder="请选择">
+          <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in optionsTwo"
+              v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -38,19 +28,11 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—教学班成绩单—</span>
-              </div>
-            </el-row>
-            <el-row>
-              <jiaoxue-class-grade-table :all-grade-table-data="allGradeTableData" :table-header="tableInfo" />
-            </el-row>
-            <el-row style="padding-top: 40px">
-              <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—十分一档统计图—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—科目成绩单—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-one-score-chart />
+              <subject-grade-table :all-grade-table-data="allGradeTableData" :table-header="tableInfo" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="重点关注" name="second">
@@ -65,7 +47,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-important-focus-table />
+              <subject-important-focus-table />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
@@ -76,10 +58,10 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-front-rank-chart />
+              <subject-front-rank-chart />
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="班校对比" name="third">
+          <el-tab-pane label="科校对比" name="third">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -87,11 +69,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理班六率班校对比图—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—科目六率分析—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <class-to-school-chart />
+              <subject-class-six-rates-ana :all-grade-six-rates-data="allGradeSixRatesData" :table-header="tableInfoTwo" />
+            </el-row>
+            <el-row style="padding-top: 40px">
+              <div class="title">
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—科目六率班校对比图—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-six-rate-class-chart />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="等级分布" name="fourth">
@@ -102,17 +92,17 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理班等级分布图—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—科目等级分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-students-rank-chart />
+              <subject-students-rank-chart />
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-student-rank-table />
+              <subject-student-rank-table />
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="历次对比" name="fourth1">
+          <el-tab-pane label="历次分布" name="fourtha">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -120,7 +110,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">-学期内历次成绩分析-</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">-政治历次成绩分析-</span>
               </div>
             </el-row>
             <el-row style="paddig-top: 20px">
@@ -131,7 +121,7 @@
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
-                  <jiaoxue-term-grade-average-table :term-average-data="termAverageData" :table-header="tableInfoThree" />
+                  <subject-term-grade-average-table :term-average-data="termAverageData" :table-header="tableInfoThree" />
                 </el-row>
               </el-col>
               <el-col :span="12">
@@ -141,7 +131,7 @@
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
-                  <jiaoxue-trend-chart />
+                  <subject-trend-chart />
                 </el-row>
               </el-col>
             </el-row>
@@ -151,7 +141,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoFour" />
+              <subject-in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoFour" />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
@@ -159,7 +149,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <jiaoxue-six-rate-chart />
+              <subject-six-rate-chart />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -167,60 +157,68 @@
     </el-row>
   </div>
 </template>
+
 <script>
-import jiaoxueClassGradeTable from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueClassGradeTable'
-import jiaoxueOneScoreChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueOneScoreChart'
-import jiaoxueImportantFocusTable from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueImportantFocusTable'
-import jiaoxueFrontRankChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueFrontRankChart'
-import classToSchoolChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/classToSchoolChart'
-import jiaoxueStudentsRankChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueStudentsRankChart'
-import jiaoxueStudentRankTable from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueStudentRankTable'
-import jiaoxueTermGradeAverageTable from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueTermGradeAverageTable'
-import jiaoxueTrendChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueTrendChart'
-import jiaoxueInTermSixRatesTable from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueInTermSixRatesTable'
-import jiaoxueSixRateChart from '@/views/teacherGradeReport/classAnalyze/jiaoxueban/tableAndChart/jiaoxueSixRateChart'
+import subjectGradeTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectGradeTable'
+import subjectImportantFocusTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectImportantFocusTable'
+import subjectFrontRankChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectFrontRankChart'
+import subjectClassSixRatesAna from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectClassSixRatesAna'
+import subjectSixRateClassChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectSixRateClassChart'
+import subjectStudentsRankChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectStudentsRankChart'
+import subjectStudentRankTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectStudentRankTable'
+import subjectTermGradeAverageTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectTermGradeAverageTable'
+import subjectTrendChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectTrendChart'
+import subjectInTermSixRatesTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectInTermSixRatesTable'
+import subjectSixRateChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectSixRateChart'
 export default {
-  name: 'Jiaoxue',
+  name: 'ZhengzhiAnalysis',
   components: {
-    jiaoxueClassGradeTable,
-    jiaoxueOneScoreChart,
-    jiaoxueImportantFocusTable,
-    jiaoxueFrontRankChart,
-    classToSchoolChart,
-    jiaoxueStudentsRankChart,
-    jiaoxueStudentRankTable,
-    jiaoxueTermGradeAverageTable,
-    jiaoxueTrendChart,
-    jiaoxueInTermSixRatesTable,
-    jiaoxueSixRateChart
+    subjectGradeTable,
+    subjectImportantFocusTable,
+    subjectFrontRankChart,
+    subjectClassSixRatesAna,
+    subjectSixRateClassChart,
+    subjectStudentsRankChart,
+    subjectStudentRankTable,
+    subjectTermGradeAverageTable,
+    subjectTrendChart,
+    subjectInTermSixRatesTable,
+    subjectSixRateChart
   },
   data() {
     return {
+      value: '选项1',
+      allGradeTableData: [],
+      allGradeSixRatesData: [],
       termAverageData: [],
       inTermSixRatesData: [],
-      allGradeTableData: [],
-      subjectValue: '选项1',
-      activeName: 'first',
-      value: '选项1',
       tableInfo: [
         { prop: 'id', lable: '序号' },
         { prop: 'studentMachineCard', lable: '考号' },
         { prop: 'studentName', lable: '姓名' },
-        { prop: 'classId', lable: '班级/行政班' },
-        { prop: 'coversionTotal', lable: '总分' },
-        { prop: 'classIndex', lable: '班名次' },
-        { prop: 'classIndex', lable: '校名次' },
-        { prop: 'advancefall', lable: '进步/后退' },
-        { prop: 'yuwenScore', lable: '语文' },
-        { prop: 'shuxueScore', lable: '数学' },
-        { prop: 'yingyuScore', lable: '英语' },
-        { prop: 'threeScore', lable: '三科总分' },
-        { prop: 'physics', lable: '物理' },
-        { prop: 'huaxueCoversion', lable: '化学' },
-        { prop: 'shengwuCoversion', lable: '生物' },
-        { prop: 'lishiCoversion', lable: '历史' },
-        { prop: 'diliCoversion', lable: '地理' },
-        { prop: 'zhengzhiCoversion', lable: '政治' }
+        { prop: 'classId', lable: '科目' },
+        { prop: 'classIndex', lable: '班级' },
+        { prop: 'advancefall', lable: '成绩' },
+        { prop: 'yuwenScore', lable: '班名次' },
+        { prop: 'shuxueScore', lable: '校名次' },
+        { prop: 'yingyuScore', lable: '进步/后退' }
+      ],
+      tableInfoTwo: [
+        { prop: 'studentMachineCard', lable: '类别' },
+        { prop: 'studentName', lable: '人数' },
+        { prop: 'classId', lable: '平均分' },
+        { prop: 'classIndex', lable: '高分人数' },
+        { prop: 'classIndex', lable: '高分率' },
+        { prop: 'advancefall', lable: '优秀人数' },
+        { prop: 'yuwenScore', lable: '优秀率' },
+        { prop: 'shuxueScore', lable: '良好人数' },
+        { prop: 'yingyuScore', lable: '良好率' },
+        { prop: 'threeScore', lable: '及格人数' },
+        { prop: 'physics', lable: '及格率' },
+        { prop: 'huaxueCoversion', lable: '低分人数' },
+        { prop: 'shengwuCoversion', lable: '低分率' },
+        { prop: 'lishiCoversion', lable: '超均人数' },
+        { prop: 'diliCoversion', lable: '超均率' }
       ],
       tableInfoThree: [
         { prop: 'id', lable: '日期' },
@@ -246,6 +244,7 @@ export default {
         { prop: 'lishiCoversion', lable: '超均人数' },
         { prop: 'diliCoversion', lable: '超均率' }
       ],
+      activeName: 'first',
       options: [{
         value: '选项1',
         label: '一班'
@@ -261,40 +260,7 @@ export default {
       }, {
         value: '选项5',
         label: '五班'
-      }],
-      optionsTwo: [{
-        value: '选项1',
-        label: '语文'
-      }, {
-        value: '选项2',
-        label: '数学'
-      }, {
-        value: '选项3',
-        label: '英语'
-      }, {
-        value: '选项4',
-        label: '物理'
-      }, {
-        value: '选项5',
-        label: '化学'
-      }, {
-        value: '选项6',
-        label: '生物'
-      }, {
-        value: '选项7',
-        label: '历史'
-      }, {
-        value: '选项8',
-        label: '政治'
-      }, {
-        value: '选项9',
-        label: '地理'
       }]
-    }
-  },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
     }
   }
 }

@@ -112,7 +112,7 @@
               <six-rate-class-chart />
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="等级分布" name="fourth" >
+          <el-tab-pane label="等级分布" name="fourth">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -163,8 +163,7 @@
                 </el-row>
               </el-col>
             </el-row>
-            <el-row style="padding-top: 20px">
-            </el-row>
+            <el-row style="padding-top: 20px" />
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩班级六率表-</span>

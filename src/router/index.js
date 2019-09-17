@@ -82,7 +82,7 @@ export const constantRoutes = [
   {
     path: '',
     component: Layout,
-    redirect: '',
+    redirect: 'dashboard',
     children: [
       {
         path: 'dashboard',
@@ -225,22 +225,44 @@ export const asyncRoutes = [
         ]
       },
       {
-        path: 'three',
-        component: () => import('@/views/permission/role'),
-        name: 'b',
+        path: '/gradereport/subjectAnalysis',
+        component: () => import('@/views/teacherGradeReport/subjectAnalysis/index'),
+        name: 'subjectAnalysis',
         meta: {
           title: '科目分析',
           roles: ['admin']
-        }
+        },
+        children: [
+          { path: '/gradereport/subjectAnalysis/yuwen', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yuwen/yuwenAnalysis'), name: 'yuwen', meta: { title: '语文' }},
+          { path: '/gradereport/subjectAnalysis/shuxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shuxue/shuxueAnalysis'), name: 'shuxue', meta: { title: '数学' }},
+          { path: '/gradereport/subjectAnalysis/yingyu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yingyu/yingyuAnalysis'), name: 'yingyu', meta: { title: '英语' }},
+          { path: '/gradereport/subjectAnalysis/wuli', component: () => import('@/views/teacherGradeReport/subjectAnalysis/wuli/wuliAnalysis'), name: 'wuli', meta: { title: '物理' }},
+          { path: '/gradereport/subjectAnalysis/huaxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/huaxue/huaxueAnalysis'), name: 'huaxue', meta: { title: '化学' }},
+          { path: '/gradereport/subjectAnalysis/shengwu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shengwu/shengwuAnalysis'), name: 'shengwu', meta: { title: '生物' }},
+          { path: '/gradereport/subjectAnalysis/lishi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/lishi/lishiAnalysis'), name: 'lishi', meta: { title: '历史' }},
+          { path: '/gradereport/subjectAnalysis/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/zhengzhi/zhengzhiAnalysis'), name: 'zhengzhi', meta: { title: '政治' }},
+          { path: '/gradereport/subjectAnalysis/dili', component: () => import('@/views/teacherGradeReport/subjectAnalysis/dili/diliAnalysis'), name: 'dili', meta: { title: '地理' }}
+        ]
       },
       {
-        path: 'four',
-        component: () => import('@/views/permission/role'),
-        name: 'c',
+        path: '/gradereport/subjectCompare',
+        component: () => import('@/views/teacherGradeReport/subjectCompare/index'),
+        name: 'subjectCompare',
         meta: {
           title: '科目对比',
           roles: ['admin']
-        }
+        },
+        children: [
+          { path: '/gradereport/subjectCompare/yuwen', component: () => import('@/views/teacherGradeReport/subjectCompare/yuwen/yuwenCompare'), name: 'yuwen', meta: { title: '语文' }},
+          { path: '/gradereport/subjectCompare/shuxue', component: () => import('@/views/teacherGradeReport/subjectCompare/shuxue/shuxueCompare'), name: 'shuxue', meta: { title: '数学' }},
+          { path: '/gradereport/subjectCompare/yingyu', component: () => import('@/views/teacherGradeReport/subjectCompare/yingyu/yingyuCompare'), name: 'yingyu', meta: { title: '英语' }},
+          { path: '/gradereport/subjectCompare/wuli', component: () => import('@/views/teacherGradeReport/subjectCompare/wuli/wuliCompare'), name: 'wuli', meta: { title: '物理' }},
+          { path: '/gradereport/subjectCompare/huaxue', component: () => import('@/views/teacherGradeReport/subjectCompare/huaxue/huaxueCompare'), name: 'huaxue', meta: { title: '化学' }},
+          { path: '/gradereport/subjectCompare/shengwu', component: () => import('@/views/teacherGradeReport/subjectCompare/shengwu/shengwuCompare'), name: 'shengwu', meta: { title: '生物' }},
+          { path: '/gradereport/subjectCompare/lishi', component: () => import('@/views/teacherGradeReport/subjectCompare/lishi/lishiCompare'), name: 'lishi', meta: { title: '历史' }},
+          { path: '/gradereport/subjectCompare/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectCompare/zhengzhi/zhengzhiCompare'), name: 'zhengzhi', meta: { title: '政治' }},
+          { path: '/gradereport/subjectCompare/dili', component: () => import('@/views/teacherGradeReport/subjectCompare/dili/diliCompare'), name: 'dili', meta: { title: '地理' }}
+        ]
       },
       {
         path: 'gradeprofiles',

@@ -3,7 +3,7 @@
     <el-row>
       <div class="mainContent">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="班级六率对比" name="first">
+          <el-tab-pane label="历史科目六率对比" name="first">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -11,11 +11,11 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—班级六率对比表—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—历史科目六率对比表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
+              <subject-class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
@@ -23,10 +23,10 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <six-rates-comparison-chart />
+              <subject-six-rates-comparison-chart />
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="全校前N名上线分布对比" name="second">
+          <el-tab-pane label="历史单科前N名上线分布对比" name="second">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -34,19 +34,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—全校前N名上线分布表—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—历史单科前N名上线分布表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
+              <subject-front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—全校前N名上线分布图—</span>
+                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—历史单科前N名上线分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <front-n-rank-chart />
+              <subject-front-n-rank-chart />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -56,21 +56,22 @@
 </template>
 
 <script>
-import classSixRatesCom from '@/views/teacherGradeReport/classComparsion/xingzhenban/tableAndChart/classSixRatesCom'
-import sixRatesComparisonChart from '@/views/teacherGradeReport/classComparsion/xingzhenban/tableAndChart/sixRatesComparisonChart'
-import frontNRank from '@/views/teacherGradeReport/classComparsion/xingzhenban/tableAndChart/frontNRank'
-import frontNRankChart from '@/views/teacherGradeReport/classComparsion/xingzhenban/tableAndChart/frontNRankChart'
+import subjectClassSixRatesCom from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectClassSixRatesCom'
+import subjectSixRatesComparisonChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectSixRatesComparisonChart'
+import subjectFrontNRank from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRank'
+import subjectFrontNRankChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRankChart'
 export default {
-  name: 'XingzhenCompare',
-  components: { classSixRatesCom, sixRatesComparisonChart, frontNRank, frontNRankChart },
+  name: 'LishiCompare',
+  components: { subjectClassSixRatesCom, subjectSixRatesComparisonChart, subjectFrontNRank, subjectFrontNRankChart },
   data() {
     return {
-      activeName: 'first',
       inTermSixRatesData: [],
       frontData: [],
+      activeName: 'first',
       tableInfo: [
         { prop: 'id', lable: '年级' },
-        { prop: 'studentMachineCard', lable: '班级/行政班' },
+        { prop: 'id', lable: '科目' },
+        { prop: 'studentMachineCard', lable: '班级' },
         { prop: 'studentName', lable: '高分人数' },
         { prop: 'classId', lable: '高分率' },
         { prop: 'coversionTotal', lable: '高分率排名' },
@@ -92,7 +93,8 @@ export default {
       ],
       tableInfoTwo: [
         { prop: 'physics', lable: '年级' },
-        { prop: 'huaxueCoversion', lable: '班级/行政班' },
+        { prop: 'id', lable: '科目' },
+        { prop: 'huaxueCoversion', lable: '班级' },
         { prop: 'shengwuCoversion', lable: '校前100名人数' },
         { prop: 'lishiCoversion', lable: '前100名排名' },
         { prop: 'diliCoversion', lable: '校前200名人数' },
@@ -100,11 +102,6 @@ export default {
         { prop: 'diliCoversion', lable: '校前300名人数' },
         { prop: 'zhengzhiCoversion', lable: '校前300名排名人数' }
       ]
-    }
-  },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
     }
   }
 }
@@ -114,5 +111,4 @@ export default {
   .title{
     text-align: center;
   }
-
 </style>
