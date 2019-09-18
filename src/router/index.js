@@ -173,7 +173,7 @@ export const asyncRoutes = [
     redirect: '',
     alwaysShow: true, // will always show the root menu
     meta: {
-      title: '成绩报告',
+      title: '成绩分析',
       icon: 'chart',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -301,7 +301,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/svg-icons/index'),
         name: 'jilu',
-        meta: { title: '错题记录', icon: 'form', noCache: true }
+        meta: { title: '考试分析', icon: 'form', noCache: true }
       }
     ]
   },

@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row>
       <div class="title">
-        <span style="font-size: 30px;font-weight: bolder;color: #27ba6e">-最新成绩信息-</span>
+        <!--        <span style="font-size: 30px;font-weight: bolder;color: #27ba6e">-最新成绩信息-</span>-->
       </div>
     </el-row>
     <el-row>

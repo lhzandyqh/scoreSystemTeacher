@@ -4,7 +4,7 @@
       <span style="font-size: 20px;font-weight: bolder">等级分布图</span>
     </el-row>
     <el-row style="padding-top: 30px">
-      <el-col :span="16">
+      <el-col :span="24">
         <div class="select">
           <el-row>
             <el-col :span="4">
@@ -18,9 +18,9 @@
               </el-select>
             </el-col>
             <el-col :span="4" :offset="1">
-              <el-select v-model="value" placeholder="请选择科目">
+              <el-select v-model="valuetwo" placeholder="请选择科目">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in optionsTwo"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -31,20 +31,19 @@
         </div>
         <div id="rankDis" style="width:100%;height: 400px" />
       </el-col>
-      <el-col :span="8">
-        <div class="card-container">
-          <el-card class="box-card">
-            <div class="title">
-              <span style="font-size: 20px;font-weight: bolder">高分【90%-100%】学生名单</span>
-            </div>
-            <el-divider />
-            <div class="content">
-              <span style="font-size: 18px">刘晓明</span>
-              <span style="font-size: 18px">陈元</span>
-            </div>
-          </el-card>
-        </div>
-      </el-col>
+      <!--      <el-col :span="8">-->
+      <!--        <div class="card-container">-->
+      <!--          <el-card class="box-card">-->
+      <!--            <div class="title">-->
+      <!--              <span style="font-size: 20px;font-weight: bolder">高分【90%-100%】学生名单</span>-->
+      <!--            </div>-->
+      <!--            <div class="content">-->
+      <!--              <span style="font-size: 18px">刘晓明</span>-->
+      <!--              <span style="font-size: 18px">陈元</span>-->
+      <!--            </div>-->
+      <!--          </el-card>-->
+      <!--        </div>-->
+      <!--      </el-col>-->
     </el-row>
   </div>
 </template>
@@ -56,6 +55,52 @@ export default {
   name: 'RankDistributionChart',
   data() {
     return {
+      value: '',
+      valuetwo: '',
+      options: [{
+        value: '选项1',
+        label: '一班'
+      }, {
+        value: '选项2',
+        label: '二班'
+      }, {
+        value: '选项3',
+        label: '三班'
+      }, {
+        value: '选项4',
+        label: '四班'
+      }, {
+        value: '选项5',
+        label: '五班'
+      }],
+      optionsTwo: [{
+        value: '选项1',
+        label: '语文'
+      }, {
+        value: '选项2',
+        label: '数学'
+      }, {
+        value: '选项3',
+        label: '英语'
+      }, {
+        value: '选项4',
+        label: '物理'
+      }, {
+        value: '选项5',
+        label: '化学'
+      }, {
+        value: '选项6',
+        label: '生物'
+      }, {
+        value: '选项7',
+        label: '历史'
+      }, {
+        value: '选项8',
+        label: '政治'
+      }, {
+        value: '选项9',
+        label: '地理'
+      }],
       option: {
         title: {
           // text: '某站点用户访问来源',
@@ -73,7 +118,7 @@ export default {
         },
         series: [
           {
-            name: '访问来源',
+            name: '等级分布',
             type: 'pie',
             radius: '55%',
             center: ['50%', '60%'],

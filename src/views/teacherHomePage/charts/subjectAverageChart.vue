@@ -26,6 +26,35 @@ export default {
   name: 'SubjectAverageChart',
   data() {
     return {
+      value: '',
+      options: [{
+        value: '选项1',
+        label: '语文'
+      }, {
+        value: '选项2',
+        label: '数学'
+      }, {
+        value: '选项3',
+        label: '英语'
+      }, {
+        value: '选项4',
+        label: '物理'
+      }, {
+        value: '选项5',
+        label: '化学'
+      }, {
+        value: '选项6',
+        label: '生物'
+      }, {
+        value: '选项7',
+        label: '历史'
+      }, {
+        value: '选项8',
+        label: '政治'
+      }, {
+        value: '选项9',
+        label: '地理'
+      }],
       option: {
         tooltip: {
           trigger: 'axis'
