@@ -36,7 +36,7 @@ export function filterAsyncRoutes(routes, roles) {
 
 const permission = {
   state: {
-    routes: [],
+    routes: constantRoutes, // []
     addRoutes: []
   },
   mutations: {
@@ -48,15 +48,30 @@ const permission = {
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
-        const { roles } = data
-        let accessedRoutes
-        if (roles.includes('admin')) {
-          accessedRoutes = asyncRoutes
-        } else {
-          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-        }
-        commit('SET_ROUTES', accessedRoutes)
-        resolve(accessedRoutes)
+        // const { roles } = data
+        // let accessedRoutes
+        // if (roles.includes('admin')) {
+        //   accessedRoutes = asyncRoutes
+        // } else {
+        //   accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+        // }
+        // commit('SET_ROUTES', accessedRoutes)
+        // resolve(accessedRoutes)
+        // const { roles } = data
+        let accessedRouters
+        const role = window.localStorage.getItem('userRole')
+        // eslint-disable-next-line prefer-const
+        accessedRouters = filterAsyncRoutes(asyncRoutes, [role])
+        console.log('输出GenerateRoutes中的role看一看')
+        console.log(role)
+        console.log('输出accessedRouters')
+        console.log(accessedRouters)
+        // } else {
+        // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
+        // }
+        // }
+        commit('SET_ROUTERS', accessedRouters)
+        resolve()
       })
     }
   }

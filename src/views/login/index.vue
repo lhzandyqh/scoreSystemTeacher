@@ -40,8 +40,8 @@ export default {
       examType: '',
       classGrade: [],
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: ''
       }
     }
   },
@@ -64,8 +64,16 @@ export default {
       console.log('登录登录')
       this.loading = true
       this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+        console.log('登录成功')
         this.loading = false
-        this.$router.push({ path: this.redirect || '/' })
+        this.$message({
+          message: '登录成功',
+          type: 'success'
+        })
+        // this.$router.push({ path: this.redirect || '/' })
+        console.log('我要跳转页面了')
+        this.$router.push({ path: '/' })
+        console.log('我好了')
       }).catch(() => {
         this.loading = false
       })

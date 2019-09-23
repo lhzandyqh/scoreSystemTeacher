@@ -45,15 +45,33 @@ const user = {
 
   actions: {
     // 用户名登录
+    // LoginByUsername({ commit }, userInfo) {
+    //   const username = userInfo.username.trim()
+    //   return new Promise((resolve, reject) => {
+    //     loginByUsername(username, userInfo.password).then(response => {
+    //       const data = response.data
+    //       commit('SET_TOKEN', data.token)
+    //       setToken(response.data.token)
+    //       resolve()
+    //     }).catch(error => {
+    //       reject(error)
+    //     })
+    //   })
+    // },
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           const data = response.data
+          // setToken(response.data.token)
+          // resolve()
+          window.localStorage.setItem('userRole', data.rolename)
           commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
+          setToken(data.token)
           resolve()
+          // this.$router.push({ path: '/' })
         }).catch(error => {
+          console.log('有错')
           reject(error)
         })
       })
@@ -62,22 +80,59 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
+        // getUserInfo(state.token).then(response => {
+        //   // 由于mockjs 不支持自定义状态码只能这样hack
+        //   if (!response.data) {
+        //     reject('Verification failed, please login again.')
+        //   }
+        //   const data = response.data
+        //
+        //   if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+        //     commit('SET_ROLES', data.roles)
+        //   } else {
+        //     reject('getInfo: roles must be a non-null array!')
+        //   }
+        //
+        //   commit('SET_NAME', data.name)
+        //   commit('SET_AVATAR', data.avatar)
+        //   commit('SET_INTRODUCTION', data.introduction)
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
+        // const role = window.localStorage.getItem('role')
+        // if (role) {
+        //   commit('SET_ROLES', [role])
+        // } else {
+        //   commit('SET_ROLES', ['admin'])
+        // }
+        //
         getUserInfo(state.token).then(response => {
           // 由于mockjs 不支持自定义状态码只能这样hack
-          if (!response.data) {
-            reject('Verification failed, please login again.')
-          }
-          const data = response.data
+          // if (!response.data) {
+          //   reject('Verification failed, please login again.')
+          // }
+          // const data = response.data
 
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+          const role = window.localStorage.getItem('role')
+          if (role) {
+            commit('SET_ROLES', [role])
           } else {
-            reject('getInfo: roles must be a non-null array!')
+            commit('SET_ROLES', ['admin'])
           }
 
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
+          console.log('getUserInfo')
+          commit('SET_AVATAR', 'http://58.119.112.11:11005/b9be8be2-ad8c-4eed-ac9d-e83711334efe.jpg')
+
+          // if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+          //   commit('SET_ROLES', data.roles)
+          // } else {
+          //   reject('getInfo: roles must be a non-null array!')
+          // }
+          //
+          // commit('SET_NAME', data.name)
+          // commit('SET_AVATAR', data.avatar)
+          // commit('SET_INTRODUCTION', data.introduction)
           resolve(response)
         }).catch(error => {
           reject(error)

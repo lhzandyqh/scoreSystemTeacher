@@ -175,7 +175,7 @@ export const asyncRoutes = [
     meta: {
       title: '成绩分析',
       icon: 'chart',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['任课教师'] // you can set roles in root nav
     },
     children: [
       {
@@ -184,7 +184,7 @@ export const asyncRoutes = [
         name: 'classAnalysis',
         meta: {
           title: '班级分析',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: ['任课教师'] // or you can only set roles in sub nav
         },
         children: [
           { path: '/gradereport/classAnalysis/xingzheng', component: () => import('@/views/teacherGradeReport/classAnalyze/xingzhengban/xingzheng'), name: 'xingzhengban', meta: { title: '行政班' }},
@@ -216,7 +216,8 @@ export const asyncRoutes = [
         component: () => import('@/views/teacherGradeReport/classComparsion/index'),
         name: 'classCompare',
         meta: {
-          title: '班级对比'
+          title: '班级对比',
+          roles: ['任课教师']
           // if do not set roles, means: this page does not require permission
         },
         children: [
@@ -230,7 +231,7 @@ export const asyncRoutes = [
         name: 'subjectAnalysis',
         meta: {
           title: '科目分析',
-          roles: ['admin']
+          roles: ['任课教师']
         },
         children: [
           { path: '/gradereport/subjectAnalysis/yuwen', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yuwen/yuwenAnalysis'), name: 'yuwen', meta: { title: '语文' }},
@@ -250,7 +251,7 @@ export const asyncRoutes = [
         name: 'subjectCompare',
         meta: {
           title: '科目对比',
-          roles: ['admin']
+          roles: ['任课教师']
         },
         children: [
           { path: '/gradereport/subjectCompare/yuwen', component: () => import('@/views/teacherGradeReport/subjectCompare/yuwen/yuwenCompare'), name: 'yuwen', meta: { title: '语文' }},
@@ -270,7 +271,7 @@ export const asyncRoutes = [
         name: 'd',
         meta: {
           title: '年级概况',
-          roles: ['admin']
+          roles: ['任课教师']
         },
         children: [
           { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }},
@@ -283,7 +284,7 @@ export const asyncRoutes = [
         name: 'e',
         meta: {
           title: '年级分析',
-          roles: ['admin']
+          roles: ['任课教师']
         },
         children: [
           { path: 'gradeSixRates', component: () => import('@/views/teacherGradeReport/gradeAnalysis/gradeSixRates/gradeRates'), name: 'gradeSixRates', meta: { title: '年级六率' }},

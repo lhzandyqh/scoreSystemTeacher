@@ -33,10 +33,21 @@ router.beforeEach((to, from, next) => {
           .then(res => {
             // 拉取user_info
             const roles = res.data.roles // note: roles must be a object array! such as: [{id: '1', name: 'editor'}, {id: '2', name: 'developer'}]
-            store.dispatch('GenerateRoutes', { roles }).then(accessRoutes => {
-              // 根据roles权限生成可访问的路由表
-              router.addRoutes(accessRoutes) // 动态添加可访问路由表
-              next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+            console.log('输出roles数组看一看')
+            console.log(roles)
+            store.dispatch('GenerateRoutes', { roles }).then(() => {
+              console.log(store.getters.addRouters)
+              router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+              if (to.name) {
+                next({ ...to, replace: true })
+              } else {
+                next({ path: '/' })
+              }
+              // // 根据roles权限生成可访问的路由表
+              // console.log('accessRoutes 要添加的 ')
+              // console.log(accessRoutes)
+              // router.addRoutes(accessRoutes) // 动态添加可访问路由表
+              // next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
             })
           })
           .catch(err => {
