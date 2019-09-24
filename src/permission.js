@@ -36,9 +36,9 @@ router.beforeEach((to, from, next) => {
             console.log('输出roles数组看一看')
             console.log(roles)
             store.dispatch('GenerateRoutes', { roles }).then(() => {
-              // 为什么是灰色的呢
-              console.log(store.getters.addRouters)
-              router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+              console.log('输出addRoutes')
+              console.log(store.getters.addRoutes)
+              router.addRoutes(store.getters.addRoutes) // 动态添加可访问路由表
               if (to.name) {
                 next({ ...to, replace: true })
               } else {

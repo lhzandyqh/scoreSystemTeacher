@@ -43,6 +43,8 @@ const permission = {
     SET_ROUTES: (state, routes) => {
       state.addRoutes = routes
       state.routes = constantRoutes.concat(routes)
+      console.log('检查set_router')
+      console.log(state.addRoutes)
     }
   },
   actions: {
@@ -70,7 +72,7 @@ const permission = {
         // accessedRouters = filterAsyncRouter(asyncRouterMapGrow, [role])
         // }
         // }
-        commit('SET_ROUTERS', accessedRouters)
+        commit('SET_ROUTES', accessedRouters)
         resolve()
       })
     }

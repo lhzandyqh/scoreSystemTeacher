@@ -175,20 +175,24 @@ export const asyncRoutes = [
     meta: {
       title: '成绩分析',
       icon: 'chart',
-      roles: ['任课教师'] // you can set roles in root nav
+      roles: ['系统管理员', '年级主任', '班主任',
+        '语文任课教师', '数学任课教师', '英语任课教师',
+        '物理任课教师', '化学任课教师', '生物任课教师',
+        '政治任课教师', '历史任课教师', '地理任课教师'] // you can set roles in root nav
     },
     children: [
       {
         path: '/gradereport/classAnalysis',
         component: () => import('@/views/teacherGradeReport/classAnalyze/index'),
         name: 'classAnalysis',
+        alwaysShow: true, // will always show the root menu
         meta: {
           title: '班级分析',
-          roles: ['任课教师'] // or you can only set roles in sub nav
+          roles: ['系统管理员', '年级主任', '班主任'] // or you can only set roles in sub nav
         },
         children: [
-          { path: '/gradereport/classAnalysis/xingzheng', component: () => import('@/views/teacherGradeReport/classAnalyze/xingzhengban/xingzheng'), name: 'xingzhengban', meta: { title: '行政班' }},
-          { path: '/gradereport/classAnalysis/jiaoxue', component: () => import('@/views/teacherGradeReport/classAnalyze/jiaoxueban/jiaoxue'), name: 'jiaoxueban', meta: { title: '教学班' }}
+          { path: '/gradereport/classAnalysis/xingzheng', component: () => import('@/views/teacherGradeReport/classAnalyze/xingzhengban/xingzheng'), name: 'xingzhengban', meta: { title: '行政班', roles: ['系统管理员', '年级主任', '班主任'] }},
+          { path: '/gradereport/classAnalysis/jiaoxue', component: () => import('@/views/teacherGradeReport/classAnalyze/jiaoxueban/jiaoxue'), name: 'jiaoxueban', meta: { title: '教学班', roles: ['系统管理员', '年级主任'] }}
         ]
         // children: [
         //   {
@@ -215,54 +219,63 @@ export const asyncRoutes = [
         path: '/gradereport/classCompare',
         component: () => import('@/views/teacherGradeReport/classComparsion/index'),
         name: 'classCompare',
+        alwaysShow: true, // will always show the root menu
         meta: {
           title: '班级对比',
-          roles: ['任课教师']
+          roles: ['系统管理员', '年级主任', '班主任']
           // if do not set roles, means: this page does not require permission
         },
         children: [
-          { path: '/gradereport/classCompare/xingzheng', component: () => import('@/views/teacherGradeReport/classComparsion/xingzhenban/xingzhenCompare'), name: 'xingzhenban', meta: { title: '行政班' }},
-          { path: '/gradereport/classCompare/jiaoxue', component: () => import('@/views/teacherGradeReport/classComparsion/jiaoxueban/jiaoxueCompare'), name: 'jiaoxueban', meta: { title: '教学班' }}
+          { path: '/gradereport/classCompare/xingzheng', component: () => import('@/views/teacherGradeReport/classComparsion/xingzhenban/xingzhenCompare'), name: 'xingzhenban', meta: { title: '行政班', roles: ['系统管理员', '年级主任', '班主任'] }},
+          { path: '/gradereport/classCompare/jiaoxue', component: () => import('@/views/teacherGradeReport/classComparsion/jiaoxueban/jiaoxueCompare'), name: 'jiaoxuebantwo', meta: { title: '教学班', roles: ['系统管理员', '年级主任'] }}
         ]
       },
       {
         path: '/gradereport/subjectAnalysis',
         component: () => import('@/views/teacherGradeReport/subjectAnalysis/index'),
         name: 'subjectAnalysis',
+        alwaysShow: true, // will always show the root menu
         meta: {
           title: '科目分析',
-          roles: ['任课教师']
+          roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师']
         },
         children: [
-          { path: '/gradereport/subjectAnalysis/yuwen', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yuwen/yuwenAnalysis'), name: 'yuwen', meta: { title: '语文' }},
-          { path: '/gradereport/subjectAnalysis/shuxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shuxue/shuxueAnalysis'), name: 'shuxue', meta: { title: '数学' }},
-          { path: '/gradereport/subjectAnalysis/yingyu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yingyu/yingyuAnalysis'), name: 'yingyu', meta: { title: '英语' }},
-          { path: '/gradereport/subjectAnalysis/wuli', component: () => import('@/views/teacherGradeReport/subjectAnalysis/wuli/wuliAnalysis'), name: 'wuli', meta: { title: '物理' }},
-          { path: '/gradereport/subjectAnalysis/huaxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/huaxue/huaxueAnalysis'), name: 'huaxue', meta: { title: '化学' }},
-          { path: '/gradereport/subjectAnalysis/shengwu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shengwu/shengwuAnalysis'), name: 'shengwu', meta: { title: '生物' }},
-          { path: '/gradereport/subjectAnalysis/lishi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/lishi/lishiAnalysis'), name: 'lishi', meta: { title: '历史' }},
-          { path: '/gradereport/subjectAnalysis/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/zhengzhi/zhengzhiAnalysis'), name: 'zhengzhi', meta: { title: '政治' }},
-          { path: '/gradereport/subjectAnalysis/dili', component: () => import('@/views/teacherGradeReport/subjectAnalysis/dili/diliAnalysis'), name: 'dili', meta: { title: '地理' }}
+          { path: '/gradereport/subjectAnalysis/yuwen', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yuwen/yuwenAnalysis'), name: 'yuwen', meta: { title: '语文', roles: ['系统管理员', '年级主任', '班主任', '语文任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/shuxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shuxue/shuxueAnalysis'), name: 'shuxue', meta: { title: '数学', roles: ['系统管理员', '年级主任', '班主任', '数学任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/yingyu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/yingyu/yingyuAnalysis'), name: 'yingyu', meta: { title: '英语', roles: ['系统管理员', '年级主任', '班主任', '英语任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/wuli', component: () => import('@/views/teacherGradeReport/subjectAnalysis/wuli/wuliAnalysis'), name: 'wuli', meta: { title: '物理', roles: ['系统管理员', '年级主任', '班主任', '物理任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/huaxue', component: () => import('@/views/teacherGradeReport/subjectAnalysis/huaxue/huaxueAnalysis'), name: 'huaxue', meta: { title: '化学', roles: ['系统管理员', '年级主任', '班主任', '化学任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/shengwu', component: () => import('@/views/teacherGradeReport/subjectAnalysis/shengwu/shengwuAnalysis'), name: 'shengwu', meta: { title: '生物', roles: ['系统管理员', '年级主任', '班主任', '生物任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/lishi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/lishi/lishiAnalysis'), name: 'lishi', meta: { title: '历史', roles: ['系统管理员', '年级主任', '班主任', '历史任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectAnalysis/zhengzhi/zhengzhiAnalysis'), name: 'zhengzhi', meta: { title: '政治', roles: ['系统管理员', '年级主任', '班主任', '政治任课教师'] }},
+          { path: '/gradereport/subjectAnalysis/dili', component: () => import('@/views/teacherGradeReport/subjectAnalysis/dili/diliAnalysis'), name: 'dili', meta: { title: '地理', roles: ['系统管理员', '年级主任', '班主任', '地理任课教师'] }}
         ]
       },
       {
         path: '/gradereport/subjectCompare',
         component: () => import('@/views/teacherGradeReport/subjectCompare/index'),
         name: 'subjectCompare',
+        alwaysShow: true, // will always show the root menu
         meta: {
           title: '科目对比',
-          roles: ['任课教师']
+          roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师']
         },
         children: [
-          { path: '/gradereport/subjectCompare/yuwen', component: () => import('@/views/teacherGradeReport/subjectCompare/yuwen/yuwenCompare'), name: 'yuwen', meta: { title: '语文' }},
-          { path: '/gradereport/subjectCompare/shuxue', component: () => import('@/views/teacherGradeReport/subjectCompare/shuxue/shuxueCompare'), name: 'shuxue', meta: { title: '数学' }},
-          { path: '/gradereport/subjectCompare/yingyu', component: () => import('@/views/teacherGradeReport/subjectCompare/yingyu/yingyuCompare'), name: 'yingyu', meta: { title: '英语' }},
-          { path: '/gradereport/subjectCompare/wuli', component: () => import('@/views/teacherGradeReport/subjectCompare/wuli/wuliCompare'), name: 'wuli', meta: { title: '物理' }},
-          { path: '/gradereport/subjectCompare/huaxue', component: () => import('@/views/teacherGradeReport/subjectCompare/huaxue/huaxueCompare'), name: 'huaxue', meta: { title: '化学' }},
-          { path: '/gradereport/subjectCompare/shengwu', component: () => import('@/views/teacherGradeReport/subjectCompare/shengwu/shengwuCompare'), name: 'shengwu', meta: { title: '生物' }},
-          { path: '/gradereport/subjectCompare/lishi', component: () => import('@/views/teacherGradeReport/subjectCompare/lishi/lishiCompare'), name: 'lishi', meta: { title: '历史' }},
-          { path: '/gradereport/subjectCompare/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectCompare/zhengzhi/zhengzhiCompare'), name: 'zhengzhi', meta: { title: '政治' }},
-          { path: '/gradereport/subjectCompare/dili', component: () => import('@/views/teacherGradeReport/subjectCompare/dili/diliCompare'), name: 'dili', meta: { title: '地理' }}
+          { path: '/gradereport/subjectCompare/yuwen', component: () => import('@/views/teacherGradeReport/subjectCompare/yuwen/yuwenCompare'), name: 'yuwentwo', meta: { title: '语文', roles: ['系统管理员', '年级主任', '班主任', '语文任课教师'] }},
+          { path: '/gradereport/subjectCompare/shuxue', component: () => import('@/views/teacherGradeReport/subjectCompare/shuxue/shuxueCompare'), name: 'shuxuetwo', meta: { title: '数学', roles: ['系统管理员', '年级主任', '班主任', '数学任课教师'] }},
+          { path: '/gradereport/subjectCompare/yingyu', component: () => import('@/views/teacherGradeReport/subjectCompare/yingyu/yingyuCompare'), name: 'yingyutwo', meta: { title: '英语', roles: ['系统管理员', '年级主任', '班主任', '英语任课教师'] }},
+          { path: '/gradereport/subjectCompare/wuli', component: () => import('@/views/teacherGradeReport/subjectCompare/wuli/wuliCompare'), name: 'wulitwo', meta: { title: '物理', roles: ['系统管理员', '年级主任', '班主任', '物理任课教师'] }},
+          { path: '/gradereport/subjectCompare/huaxue', component: () => import('@/views/teacherGradeReport/subjectCompare/huaxue/huaxueCompare'), name: 'huaxuetwo', meta: { title: '化学', roles: ['系统管理员', '年级主任', '班主任', '化学任课教师'] }},
+          { path: '/gradereport/subjectCompare/shengwu', component: () => import('@/views/teacherGradeReport/subjectCompare/shengwu/shengwuCompare'), name: 'shengwutwo', meta: { title: '生物', roles: ['系统管理员', '年级主任', '班主任', '生物任课教师'] }},
+          { path: '/gradereport/subjectCompare/lishi', component: () => import('@/views/teacherGradeReport/subjectCompare/lishi/lishiCompare'), name: 'lishitwo', meta: { title: '历史', roles: ['系统管理员', '年级主任', '班主任', '历史任课教师'] }},
+          { path: '/gradereport/subjectCompare/zhengzhi', component: () => import('@/views/teacherGradeReport/subjectCompare/zhengzhi/zhengzhiCompare'), name: 'zhengzhitwo', meta: { title: '政治', roles: ['系统管理员', '年级主任', '班主任', '政治任课教师'] }},
+          { path: '/gradereport/subjectCompare/dili', component: () => import('@/views/teacherGradeReport/subjectCompare/dili/diliCompare'), name: 'dilitwo', meta: { title: '地理', roles: ['系统管理员', '年级主任', '班主任', '地理任课教师'] }}
         ]
       },
       {
@@ -271,11 +284,20 @@ export const asyncRoutes = [
         name: 'd',
         meta: {
           title: '年级概况',
-          roles: ['任课教师']
+          roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师']
         },
         children: [
-          { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }},
-          { path: 'singleSubject', component: () => import('@/views/teacherGradeReport/gradeProfiles/singleSubjectReport/singleSubject'), name: 'singleSubject', meta: { title: '单科成绩单' }}
+          { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师'] },
+          { path: 'singleSubject', component: () => import('@/views/teacherGradeReport/gradeProfiles/singleSubjectReport/singleSubject'), name: 'singleSubject', meta: { title: '单科成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师'] }
         ]
       },
       {
@@ -284,7 +306,10 @@ export const asyncRoutes = [
         name: 'e',
         meta: {
           title: '年级分析',
-          roles: ['任课教师']
+          roles: ['系统管理员', '年级主任', '班主任',
+            '语文任课教师', '数学任课教师', '英语任课教师',
+            '物理任课教师', '化学任课教师', '生物任课教师',
+            '政治任课教师', '历史任课教师', '地理任课教师']
         },
         children: [
           { path: 'gradeSixRates', component: () => import('@/views/teacherGradeReport/gradeAnalysis/gradeSixRates/gradeRates'), name: 'gradeSixRates', meta: { title: '年级六率' }},

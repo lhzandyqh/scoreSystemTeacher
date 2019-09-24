@@ -11,6 +11,7 @@ const user = {
     avatar: '',
     introduction: '',
     roles: [],
+    id: '',
     setting: {
       articlePlatform: []
     }
@@ -40,6 +41,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_ID: (state, id) => {
+      state.id = id
     }
   },
 
@@ -65,9 +69,16 @@ const user = {
           const data = response.data
           // setToken(response.data.token)
           // resolve()
+          console.log('errno')
+          console.log(data.errno)
+          if (data.errno === 40) {
+            reject(data.errmsg)
+          }
           window.localStorage.setItem('userRole', data.rolename)
-          commit('SET_TOKEN', data.token)
-          setToken(data.token)
+          window.localStorage.setItem('id', data.id)
+          window.localStorage.setItem('username', data.username)
+          commit('SET_TOKEN', data.id)
+          setToken(data.id)
           resolve()
           // this.$router.push({ path: '/' })
         }).catch(error => {
@@ -109,11 +120,10 @@ const user = {
         //
         getUserInfo(state.token).then(response => {
           // 由于mockjs 不支持自定义状态码只能这样hack
-          // if (!response.data) {
-          //   reject('Verification failed, please login again.')
-          // }
+          // eslint-disable-next-line no-empty
           // const data = response.data
-
+          console.log('测试老师信息')
+          console.log(response.data)
           const role = window.localStorage.getItem('role')
           if (role) {
             commit('SET_ROLES', [role])

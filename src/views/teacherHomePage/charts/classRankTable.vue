@@ -14,6 +14,12 @@
       <el-table-column
         prop="renshu"
         align="center"
+        label="班级"
+        width="80"
+      />
+      <el-table-column
+        prop="renshu"
+        align="center"
         label="班级人数"
         width="80"
       />

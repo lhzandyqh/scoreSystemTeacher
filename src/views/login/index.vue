@@ -74,7 +74,8 @@ export default {
         console.log('我要跳转页面了')
         this.$router.push({ path: '/' })
         console.log('我好了')
-      }).catch(() => {
+      }).catch((errmsg) => {
+        this.$message.error(errmsg)
         this.loading = false
       })
     },

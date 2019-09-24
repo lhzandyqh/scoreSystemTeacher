@@ -92,7 +92,12 @@
 
 <script>
 export default {
-  name: 'JiaoxueStudentRankTable'
+  name: 'JiaoxueStudentRankTable',
+  data() {
+    return {
+      tableData: []
+    }
+  }
 }
 </script>
 
