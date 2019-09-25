@@ -4,17 +4,17 @@
       <el-row :gutter="5">
         <el-col :span="6">
           <el-table
-            :data="tableData"
+            :data="frontFive"
             style="width: 73%"
           >
             <el-table-column align="center" label="前5名">
               <el-table-column
-                prop="name"
+                prop="studentname"
                 label="姓名"
                 align="center"
               />
               <el-table-column
-                prop="score"
+                prop="classscore"
                 label="分数"
                 align="center"
               />
@@ -23,17 +23,17 @@
         </el-col>
         <el-col :span="6">
           <el-table
-            :data="tableData"
+            :data="behindFive"
             style="width: 73%"
           >
             <el-table-column align="center" label="后5名">
               <el-table-column
-                prop="name"
+                prop="studentname"
                 label="姓名"
                 align="center"
               />
               <el-table-column
-                prop="score"
+                prop="classscore"
                 label="分数"
                 align="center"
               />
@@ -84,10 +84,20 @@
 </template>
 
 <script>
+import { getSubjectFrontFiveData, getSubjectBehindFiveData } from '@/api/subjectAnalysisData'
 export default {
   name: 'SubjectImportantFocusOnTable',
+  props: {
+    classValue: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
+      id: window.localStorage.getItem('id'),
+      frontFive: [],
+      behindFive: [],
       tableData: [{
         name: '柯璐雅',
         score: 666
@@ -104,6 +114,40 @@ export default {
         name: '齐俊超',
         score: 662
       }]
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.getFrontFiveData()
+      this.getBehindFiveData()
+    }, 1000)
+    // this.getFrontFiveData()
+    // this.getBehindFiveData()
+  },
+  methods: {
+    getFrontFiveData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classValue
+      }
+      console.log('前五，现在的班级是' + prams.classname)
+      getSubjectFrontFiveData(prams).then(response => {
+        console.log('测试重点关注前五')
+        console.log(response.data)
+        this.frontFive = response.data.info
+      })
+    },
+    getBehindFiveData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classValue
+      }
+      console.log('后五，现在的班级是' + prams.classname)
+      getSubjectBehindFiveData(prams).then(response => {
+        console.log('测试重点关注后五')
+        console.log(response.data)
+        this.behindFive = response.data.info
+      })
     }
   }
 }

@@ -70,6 +70,8 @@ const user = {
           // setToken(response.data.token)
           // resolve()
           console.log('errno')
+          // console.log('输出用户信息')
+          console.log(response.data)
           console.log(data.errno)
           if (data.errno === 40) {
             reject(data.errmsg)

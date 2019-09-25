@@ -6,7 +6,7 @@
           <span style="font-weight: bolder">请选择班级</span>
         </div>
         <div class="select">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="classValue" placeholder="请选择" @change="changeClassData">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -47,7 +47,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-important-focus-table />
+              <subject-important-focus-table ref="important" :class-value="classValue" />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
@@ -96,10 +96,10 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-students-rank-chart />
+              <subject-students-rank-chart ref="rankchart" :class-value="classValue" />
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-student-rank-table />
+              <subject-student-rank-table ref="ranktable" :class-value="classValue" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="历次分布" name="fourtha">
@@ -170,6 +170,8 @@ import subjectTermGradeAverageTable from '@/views/teacherGradeReport/subjectAnal
 import subjectTrendChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectTrendChart'
 import subjectInTermSixRatesTable from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectInTermSixRatesTable'
 import subjectSixRateChart from '@/views/teacherGradeReport/subjectAnalysis/tableAndChart/subjectSixRateChart'
+import { getTeacherInformationData } from '@/api/homepageData'
+import { getSubjectAnaGradeTableData, getSubjectCompareSchoolData } from '@/api/subjectAnalysisData'
 export default {
   name: 'WuliAnalysis',
   components: {
@@ -187,38 +189,39 @@ export default {
   },
   data() {
     return {
-      value: '选项1',
+      classValue: '',
       allGradeTableData: [],
       allGradeSixRatesData: [],
       termAverageData: [],
       inTermSixRatesData: [],
+      id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'id', lable: '序号' },
-        { prop: 'studentMachineCard', lable: '考号' },
-        { prop: 'studentName', lable: '姓名' },
-        { prop: 'classId', lable: '科目' },
-        { prop: 'classIndex', lable: '班级' },
-        { prop: 'advancefall', lable: '成绩' },
-        { prop: 'yuwenScore', lable: '班名次' },
-        { prop: 'shuxueScore', lable: '校名次' },
+        { prop: 'index', lable: '序号' },
+        { prop: 'machinecard', lable: '考号' },
+        { prop: 'studentname', lable: '姓名' },
+        { prop: 'subject', lable: '科目' },
+        { prop: 'classname', lable: '班级' },
+        { prop: 'classscore', lable: '成绩' },
+        { prop: 'classsindex', lable: '班名次' },
+        { prop: 'schoolindex', lable: '校名次' },
         { prop: 'yingyuScore', lable: '进步/后退' }
       ],
       tableInfoTwo: [
-        { prop: 'studentMachineCard', lable: '类别' },
-        { prop: 'studentName', lable: '人数' },
-        { prop: 'classId', lable: '平均分' },
-        { prop: 'classIndex', lable: '高分人数' },
-        { prop: 'classIndex', lable: '高分率' },
-        { prop: 'advancefall', lable: '优秀人数' },
-        { prop: 'yuwenScore', lable: '优秀率' },
-        { prop: 'shuxueScore', lable: '良好人数' },
-        { prop: 'yingyuScore', lable: '良好率' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '低分人数' },
-        { prop: 'shengwuCoversion', lable: '低分率' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' }
+        { prop: 'classid', lable: '类别' },
+        { prop: 'personsum', lable: '人数' },
+        { prop: 'avg', lable: '平均分' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'mediumnum', lable: '超均人数' },
+        { prop: 'mediumratio', lable: '超均率' }
       ],
       tableInfoThree: [
         { prop: 'id', lable: '日期' },
@@ -245,22 +248,83 @@ export default {
         { prop: 'diliCoversion', lable: '超均率' }
       ],
       activeName: 'first',
-      options: [{
-        value: '选项1',
-        label: '一班'
-      }, {
-        value: '选项2',
-        label: '二班'
-      }, {
-        value: '选项3',
-        label: '三班'
-      }, {
-        value: '选项4',
-        label: '四班'
-      }, {
-        value: '选项5',
-        label: '五班'
-      }]
+      options: []
+    }
+  },
+  mounted() {
+    this.firstGetTeacherData()
+    setTimeout(() => {
+      this.getGradeTableData()
+    }, 1000)
+    this.getSubjectSixRatesData()
+  },
+  methods: {
+    firstGetTeacherData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getTeacherInformationData(prams).then(response => {
+        this.subject = response.data.info.subjectName
+        console.log('测试是否拿到科目')
+        console.log(this.subject)
+        console.log('物理科目分析测试是否能够拿到老师的个人信息')
+        console.log(response.data.info.className)
+        // eslint-disable-next-line no-empty
+        for (var i = 0; i < response.data.info.className.length; i++) {
+          const option = {
+            value: response.data.info.className[i],
+            label: response.data.info.className[i]
+          }
+          this.options.push(option)
+          this.classValue = this.options[0].value
+        }
+        console.log('测试能否拿到班级数组')
+        console.log(this.options)
+      })
+    },
+    handleClick: function() {
+      console.log('我换了，你呢弟弟')
+    },
+    // 获取科目成绩单数据
+    getGradeTableData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classValue
+      }
+      getSubjectAnaGradeTableData(prams).then(response => {
+        console.log('测试是否拿到了科目成绩单的数据')
+        console.log(response.data)
+        this.allGradeTableData = response.data.info
+      })
+    },
+    getSubjectSixRatesData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getSubjectCompareSchoolData(prams).then(response => {
+        console.log('测试是否拿到科目六率分析的数据')
+        console.log(response.data)
+        this.allGradeSixRatesData = response.data.info
+      })
+    },
+    changeClassData: function(val) {
+      let obj = {}
+      obj = this.options.find((item) => {
+        return item.value === val
+      })
+      let getName = ''
+      getName = obj.label
+      console.log('科目分析获取到的班级名' + getName)
+      this.classValue = getName
+      this.getGradeTableData()
+      // this.$refs.important.getFrontFiveData()
+      // this.$refs.important.getBehindFiveData()
+      setTimeout(() => {
+        this.$refs.important.getFrontFiveData()
+        this.$refs.important.getBehindFiveData()
+        this.$refs.rankchart.getChartData()
+        this.$refs.ranktable.getRankTableData()
+      }, 500)
     }
   }
 }

@@ -211,6 +211,7 @@ export default {
         this.subject = response.data.info.subjectName
         console.log('测试是否拿到科目')
         console.log(this.subject)
+        window.localStorage.setItem('subject', this.subject)
         console.log('等级图测试是否能够拿到老师的个人信息')
         console.log(response.data.info.className)
         // eslint-disable-next-line no-empty

@@ -1,7 +1,7 @@
 <template>
   <div class="tablecontainer">
     <el-table
-      :data="allGradeTableData"
+      :data="allGradeTableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       align="center"
       border
       height="400"
@@ -18,11 +18,11 @@
     <div class="fenye">
       <el-pagination
         style="margin-top:20px;"
-        :current-page="currentPage4"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20]"
+        :page-size="20"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
+        :total="allGradeTableData.length"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
@@ -45,17 +45,19 @@ export default {
   },
   data() {
     return {
-      currentPage4: 4
-
+      currentPage: 1,
+      pagesize: 10
     }
   },
   mounted() {
   },
   methods: {
     handleSizeChange(val) {
+      this.pagesize = val
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
+      this.currentPage = val
       console.log(`当前页: ${val}`)
     }
   }
