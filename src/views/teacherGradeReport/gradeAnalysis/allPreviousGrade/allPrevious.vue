@@ -26,7 +26,7 @@
       <el-col :span="12">
         <el-row style="padding-top: 20px">
           <div class="title">
-            <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩均分表-</span>
+            <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩均分表-</span>
           </div>
         </el-row>
         <el-row style="padding-top: 20px">
@@ -36,7 +36,7 @@
       <el-col :span="12">
         <el-row style="padding-top: 20px">
           <div class="title">
-            <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩均分趋势图-</span>
+            <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩均分趋势图-</span>
           </div>
         </el-row>
         <el-row style="padding-top: 20px">
@@ -46,7 +46,7 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩年级六率表-</span>
+        <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩年级六率表-</span>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">
@@ -54,7 +54,7 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩年级六率对比图-</span>
+        <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩年级六率对比图-</span>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">

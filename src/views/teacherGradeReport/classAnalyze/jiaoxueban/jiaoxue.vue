@@ -38,7 +38,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—教学班成绩单—</span>
+                <span style="font-size: 25px;color: #2ac06d">—教学班成绩单—</span>
               </div>
             </el-row>
             <el-row>
@@ -46,7 +46,7 @@
             </el-row>
             <el-row style="padding-top: 40px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—十分一档统计图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—十分一档统计图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -61,7 +61,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—重点关注—</span>
+                <span style="font-size: 25px;color: #2ac06d">—重点关注—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -69,7 +69,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—全校前N名分布—</span>
+                <span style="font-size: 25px;color: #2ac06d">—全校前N名分布—</span>
               </div>
               <div class="title" style="padding-top: 10px">
                 <span style="font-size: 18px;">班级：共70人   全校：共500人</span>
@@ -87,7 +87,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理班六率班校对比图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—物理班六率班校对比图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -102,7 +102,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理班等级分布图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—物理班等级分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -120,14 +120,14 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">-学期内历次成绩分析-</span>
+                <span style="font-size: 25px;color: #2ac06d">-学期内历次成绩分析-</span>
               </div>
             </el-row>
             <el-row style="paddig-top: 20px">
               <el-col :span="12">
                 <el-row style="padding-top: 20px">
                   <div class="title">
-                    <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩均分表-</span>
+                    <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩均分表-</span>
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
@@ -137,7 +137,7 @@
               <el-col :span="12">
                 <el-row style="padding-top: 20px">
                   <div class="title">
-                    <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩均分趋势图-</span>
+                    <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩均分趋势图-</span>
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
@@ -147,7 +147,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩班级六率表-</span>
+                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率表-</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -155,7 +155,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 20px;font-weight: bolder;color: #2ac06d">-学期内历次成绩班级六率对比图-</span>
+                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率对比图-</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">

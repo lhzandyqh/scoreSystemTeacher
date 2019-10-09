@@ -21,6 +21,7 @@
             v-model="loginForm.password"
             class="input_ input2"
             placeholder="请输入密码"
+            type="password"
             prefix-icon="el-icon-attract"
           />
         </div>

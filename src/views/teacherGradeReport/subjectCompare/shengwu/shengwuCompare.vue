@@ -11,7 +11,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—生物科目六率对比表—</span>
+                <span style="font-size: 25px;color: #2ac06d">—生物科目六率对比表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -19,7 +19,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—班级六率对比图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—班级六率对比图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -34,7 +34,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—生物单科前N名上线分布表—</span>
+                <span style="font-size: 25px;color: #2ac06d">—生物单科前N名上线分布表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -42,7 +42,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—生物单科前N名上线分布图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—生物单科前N名上线分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">

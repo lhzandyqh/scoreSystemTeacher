@@ -11,7 +11,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理科目六率对比表—</span>
+                <span style="font-size: 25px;color: #2ac06d">—物理科目六率对比表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -19,7 +19,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—班级六率对比图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—班级六率对比图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -34,7 +34,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理单科前N名上线分布表—</span>
+                <span style="font-size: 25px;color: #2ac06d">—物理单科前N名上线分布表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -42,7 +42,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—物理单科前N名上线分布图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—物理单科前N名上线分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -60,6 +60,7 @@ import subjectClassSixRatesCom from '@/views/teacherGradeReport/subjectCompare/t
 import subjectSixRatesComparisonChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectSixRatesComparisonChart'
 import subjectFrontNRank from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRank'
 import subjectFrontNRankChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRankChart'
+import { getSubjectCompareSixRatesData } from '@/api/subjectCompareData'
 export default {
   name: 'WuliCompare',
   components: { subjectClassSixRatesCom, subjectSixRatesComparisonChart, subjectFrontNRank, subjectFrontNRankChart },
@@ -68,27 +69,28 @@ export default {
       inTermSixRatesData: [],
       frontData: [],
       activeName: 'first',
+      id: window.localStorage.getItem('id'),
       tableInfo: [
         { prop: 'id', lable: '年级' },
-        { prop: 'id', lable: '科目' },
-        { prop: 'studentMachineCard', lable: '班级' },
-        { prop: 'studentName', lable: '高分人数' },
-        { prop: 'classId', lable: '高分率' },
+        { prop: 'subjectname', lable: '科目' },
+        { prop: 'classid', lable: '班级' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
         { prop: 'coversionTotal', lable: '高分率排名' },
-        { prop: 'classIndex', lable: '优秀人数' },
-        { prop: 'classIndex', lable: '优秀率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
         { prop: 'advancefall', lable: '优秀率排名' },
-        { prop: 'yuwenScore', lable: '良好人数' },
-        { prop: 'shuxueScore', lable: '良好率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
         { prop: 'yingyuScore', lable: '良好率排名' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
         { prop: 'huaxueCoversion', lable: '及格率排名' },
-        { prop: 'shengwuCoversion', lable: '低分人数' },
-        { prop: 'lishiCoversion', lable: '低分率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
         { prop: 'diliCoversion', lable: '低分率排名' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' },
         { prop: 'zhengzhiCoversion', lable: '超均率排名' }
       ],
       tableInfoTwo: [
@@ -102,6 +104,24 @@ export default {
         { prop: 'diliCoversion', lable: '校前300名人数' },
         { prop: 'zhengzhiCoversion', lable: '校前300名排名人数' }
       ]
+    }
+  },
+  mounted() {
+    this.getSixRatesData()
+  },
+  methods: {
+    handleClick: function() {
+      console.log('我换了，你呢弟弟')
+    },
+    getSixRatesData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getSubjectCompareSixRatesData(prams).then(response => {
+        console.log('科目对比测试是否拿到六率数据')
+        console.log(response.data)
+        this.inTermSixRatesData = response.data.info
+      })
     }
   }
 }

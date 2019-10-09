@@ -7,7 +7,7 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—年级成绩单—</span>
+        <span style="font-size: 25px;color: #2ac06d">—年级成绩单—</span>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">
@@ -29,12 +29,14 @@
 <script>
 import gradeScoreTable from '@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/tableAndChart/gradeScoreTable'
 import classStatisticChart from '@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/tableAndChart/classStatisticChart'
+import { getGradeScoreTableData } from '@/api/gradeProfilesData'
 export default {
   name: 'GradeScore',
   components: { gradeScoreTable, classStatisticChart },
   data() {
     return {
       input3: '',
+      allGradeTableData: [],
       tableInfo: [
         { prop: 'id', lable: '序号' },
         { prop: 'studentMachineCard', lable: '考号' },
@@ -55,6 +57,18 @@ export default {
         { prop: 'diliCoversion', lable: '地理' },
         { prop: 'zhengzhiCoversion', lable: '政治' }
       ]
+    }
+  },
+  mounted() {
+    this.getGradeTableData()
+  },
+  methods: {
+    getGradeTableData: function() {
+      getGradeScoreTableData().then(response => {
+        console.log('年级概况测试是否能够拿到年级成绩单数据')
+        console.log(response.data)
+        this.allGradeTableData = response.data.info
+      })
     }
   }
 }

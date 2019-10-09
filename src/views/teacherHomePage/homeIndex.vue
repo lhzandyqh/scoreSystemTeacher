@@ -83,7 +83,7 @@ export default {
 
 <style scoped>
   .title{
-    margin-top: 50px;
+    margin-top: 0px;
     text-align: center;
   }
 

@@ -168,6 +168,58 @@ export const asyncRoutes = [
   // },
 
   {
+    path: '/renkegradereport',
+    component: Layout,
+    // redirect: '/nested/menu1',
+    name: 'Nested',
+    meta: {
+      title: '成绩分析',
+      icon: 'chart',
+      roles: ['语文任课教师', '数学任课教师', '英语任课教师',
+        '物理任课教师', '化学任课教师', '生物任课教师',
+        '政治任课教师', '历史任课教师', '地理任课教师']
+    },
+    children: [
+      {
+        path: 'subjectAnalysis',
+        component: () => import('@/views/renkeTeacherGradeReport/subjectAnalysis/index'),
+        meta: { title: '科目分析' }
+      },
+      {
+        path: 'subjectCompare',
+        component: () => import('@/views/renkeTeacherGradeReport/subjectCompare/index'),
+        meta: { title: '科目对比' }
+      },
+      {
+        path: 'nianjiAnalysis',
+        component: () => import('@/views/renkeTeacherGradeReport/nianjiAnalysis/index'), // Parent router-view
+        name: 'nianjiAnalysis',
+        meta: { title: '年级分析' },
+        children: [
+          {
+            path: 'nianjiGradeTable',
+            component: () => import('@/views/renkeTeacherGradeReport/nianjiAnalysis/nianjiGradeTable/index'),
+            name: 'nianjiGradeTable',
+            meta: { title: '年级成绩单' }
+          },
+          {
+            path: 'nianjiSixRates',
+            component: () => import('@/views/renkeTeacherGradeReport/nianjiAnalysis/nianjiSixRates/index'),
+            name: 'nianjiSixRates',
+            meta: { title: '年级六率' }
+          },
+          {
+            path: 'allPreviousGrade',
+            component: () => import('@/views/renkeTeacherGradeReport/nianjiAnalysis/allPreviousGrade/index'),
+            name: 'allPreviousGrade',
+            meta: { title: '历次成绩' }
+          }
+        ]
+      }
+    ]
+  },
+
+  {
     path: '/gradereport',
     component: Layout,
     redirect: '',
@@ -175,10 +227,7 @@ export const asyncRoutes = [
     meta: {
       title: '成绩分析',
       icon: 'chart',
-      roles: ['系统管理员', '年级主任', '班主任',
-        '语文任课教师', '数学任课教师', '英语任课教师',
-        '物理任课教师', '化学任课教师', '生物任课教师',
-        '政治任课教师', '历史任课教师', '地理任课教师'] // you can set roles in root nav
+      roles: ['系统管理员', '年级主任', '班主任'] // you can set roles in root nav
     },
     children: [
       {
@@ -325,7 +374,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/svg-icons/index'),
+        // component: () => import('@/views/svg-icons/index'),
         name: 'jilu',
         meta: { title: '考试分析', icon: 'form', noCache: true }
       }
@@ -338,7 +387,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'zongjie',
-        component: () => import('@/views/svg-icons/index'),
+        // component: () => import('@/views/svg-icons/index'),
         name: 'Icons',
         meta: { title: '考试总结', icon: 'excel', noCache: true }
       }

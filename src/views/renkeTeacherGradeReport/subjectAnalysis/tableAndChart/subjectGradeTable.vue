@@ -1,0 +1,76 @@
+<template>
+  <div class="tablecontainer">
+    <el-table
+      v-loading="myLoading"
+      :data="allGradeTableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+      align="center"
+      border
+      height="400"
+      style="width: 100%;margin-top:10px;"
+    >
+      <el-table-column
+        v-for="(item,index) in tableHeader"
+        :key="index"
+        :prop="item.prop"
+        :label="item.lable"
+        align="center"
+      />
+    </el-table>
+    <div class="fenye">
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20]"
+        :page-size="20"
+        :total="allGradeTableData.length"
+        style="margin-top:20px;"
+        layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SubjectGradeTable',
+  props: {
+    allGradeTableData: {
+      type: Array,
+      required: true
+    },
+    myLoading: {
+      type: Boolean,
+      required: true
+    },
+    tableHeader: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      currentPage: 1,
+      pagesize: 10
+    }
+  },
+  mounted() {
+  },
+  methods: {
+    handleSizeChange(val) {
+      this.pagesize = val
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .fenye{
+    text-align: center;
+  }
+</style>

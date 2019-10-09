@@ -1,10 +1,11 @@
 <template>
   <div class="tablecontainer">
     <el-table
+      v-loading="loading"
       :data="inTermSixRatesData"
       align="center"
       border
-      height="300"
+      height="400"
       style="width: 100%;margin-top:10px;"
     >
       <el-table-column
@@ -33,12 +34,20 @@ export default {
   },
   data() {
     return {
-
+      loading: true
     }
   },
   mounted() {
+    setTimeout(() => {
+      this.controlLoading()
+    }, 2000)
   },
   methods: {
+    controlLoading: function() {
+      if (this.inTermSixRatesData.length !== 0) {
+        this.loading = false
+      }
+    }
   }
 }
 </script>

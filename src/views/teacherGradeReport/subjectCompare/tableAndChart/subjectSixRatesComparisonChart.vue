@@ -11,10 +11,12 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons')
+import { getSubjectCompareSixRatesData } from '@/api/subjectCompareData'
 export default {
   name: 'SixRatesComparisonChart',
   data() {
     return {
+      id: window.localStorage.getItem('id'),
       option: {
         tooltip: {
           trigger: 'axis',
@@ -117,11 +119,37 @@ export default {
   },
   mounted() {
     this.initChart()
+    this.firstGetChartData()
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('sixComparison'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    firstGetChartData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getSubjectCompareSixRatesData(prams).then(response => {
+        console.log('科目对比图测试是否拿到六率数据')
+        console.log(response.data)
+        const classArray = []
+        for (var i = 0; i < response.data.info.length; i++) {
+          classArray.push(response.data.info[i].classid)
+        }
+        console.log('检查输出的班级列表')
+        console.log(classArray)
+        this.option.yAxis.data = classArray
+        for (var k = 0; i < response.data.info.length; k++) {
+          this.option.series[0].data.push(response.data.info[k].highnumradio)
+          this.option.series[1].data.push(response.data.info[k].excellentratio)
+          this.option.series[2].data.push(response.data.info[k].goodratio)
+          this.option.series[3].data.push(response.data.info[k].passratio)
+          this.option.series[4].data.push(response.data.info[k].failratio)
+          this.option.series[5].data.push(response.data.info[k].beyondradio)
+        }
+        this.initChart()
+      })
     }
   }
 }

@@ -7,7 +7,7 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">—年级成绩六率分析—</span>
+        <span style="font-size: 25px;color: #2ac06d">—年级成绩六率分析—</span>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">
