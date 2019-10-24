@@ -44,3 +44,22 @@ export function getSubjectCompareGradeRankData(parems) {
     params: parems
   })
 }
+
+// 获取科目分析学期内历次成绩均分数据
+export function getInTermSuccessiveGradeAverageData(parems) {
+  return request({
+    url: '/api/teachersubject/teachSubjectAllAvgAndDiv',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 获取科目分析学期内历次成绩班级六率数据
+export function getInTermSuccessiveSixRatesData(parems) {
+  return request({
+    url: '/api/teachersubject/teachSubjectAllSixRadio',
+    method: 'post',
+    params: parems
+  })
+}
+

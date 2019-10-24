@@ -8,11 +8,47 @@
       <el-col :span="12">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span style="font-weight: bolder">前十名学生名单</span>
+            <span style="font-weight: bolder">前100名学生名单</span>
+            <el-button style="float: right; padding: 3px 0" type="text">上一页</el-button>
+            <el-button style="float: right; padding: 3px 0" type="text">下一页</el-button>
           </div>
           <div>
-            <span style="font-size: 14px">孙金鑫</span><br>
-            <span style="font-size: 14px">邓庆东</span>
+            <!--            <span style="font-size: 14px">孙金鑫</span><br>-->
+            <!--            <span style="font-size: 14px">邓庆东</span>-->
+            <el-row :gutter="20">
+              <el-col :span="4">
+                <span style="font-size: 14px">齐俊超</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">吴思琪</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">段红瑞</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">陈科</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">孙金鑫</span>
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" style="padding-top: 20px">
+              <el-col :span="4">
+                <span style="font-size: 14px">杜明</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">刘静怡</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">高紫燕</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">赵明凯</span>
+              </el-col>
+              <el-col :span="4">
+                <span style="font-size: 14px">陈瑞芬</span>
+              </el-col>
+            </el-row>
           </div>
         </el-card>
       </el-col>
@@ -82,7 +118,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['前100名', '前200名', '前300名'],
+            data: ['前100名', '前100-200名', '前200-300名'],
             axisTick: {
               alignWithLabel: true
             }

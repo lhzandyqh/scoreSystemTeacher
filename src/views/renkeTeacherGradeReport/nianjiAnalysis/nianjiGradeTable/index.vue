@@ -21,7 +21,7 @@
       <!--          />-->
       <!--        </el-select>-->
       <!--      </el-col>-->
-      <el-col :span="4">
+      <el-col :span="5">
         <el-input v-model="input3" placeholder="请输入学生姓名查询" class="input-with-select">
           <el-button slot="append" icon="el-icon-search" />
         </el-input>
@@ -46,7 +46,6 @@ export default {
       loading: true,
       id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'id', lable: '序号' },
         { prop: 'studentnuber', lable: '考号' },
         { prop: 'studentname', lable: '姓名' },
         { prop: 'classname', lable: '班级/行政班' },

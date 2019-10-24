@@ -167,6 +167,7 @@ export const asyncRoutes = [
   //   ]
   // },
 
+  // 任课老师路由
   {
     path: '/renkegradereport',
     component: Layout,
@@ -200,7 +201,7 @@ export const asyncRoutes = [
             path: 'nianjiGradeTable',
             component: () => import('@/views/renkeTeacherGradeReport/nianjiAnalysis/nianjiGradeTable/index'),
             name: 'nianjiGradeTable',
-            meta: { title: '年级成绩单' }
+            meta: { title: '当次成绩' }
           },
           {
             path: 'nianjiSixRates',
@@ -219,6 +220,123 @@ export const asyncRoutes = [
     ]
   },
 
+  // 班主任路由
+  {
+    path: '/banzhurengradereport',
+    component: Layout,
+    // redirect: '/nested/menu1',
+    name: 'Nested',
+    meta: {
+      title: '成绩分析',
+      icon: 'chart',
+      roles: ['班主任']
+    },
+    children: [
+      {
+        path: 'classAnalysis',
+        // component: () => import('@/views/banzhurenTeacherGradeReport/classAnalysis/index'), // Parent router-view
+        component: () => import('@/views/banzhurenTeacherGradeReport/classAnalysis/xingzhengClass/index'), // Parent router-view
+        name: 'banjifenxi',
+        meta: { title: '班级分析' }
+        // alwaysShow: true, // will always show the root menu
+        // children: [
+        //   {
+        //     path: 'fenxixingzheng',
+        //     component: () => import('@/views/banzhurenTeacherGradeReport/classAnalysis/xingzhengClass/index'),
+        //     name: 'nianjiGradeTable',
+        //     meta: { title: '行政班' }
+        //   }
+        // ]
+      },
+      {
+        path: 'classCompare',
+        // component: () => import('@/views/banzhurenTeacherGradeReport/classCompare/index'), // Parent router-view
+        component: () => import('@/views/banzhurenTeacherGradeReport/classCompare/xingzhengClass/index'), // Parent router-view
+        name: 'banjiduibi',
+        meta: { title: '班级对比' }
+        // alwaysShow: true, // will always show the root menu
+        // children: [
+        //   {
+        //     path: 'biduixingzheng',
+        //     component: () => import('@/views/banzhurenTeacherGradeReport/classCompare/xingzhengClass/index'),
+        //     name: 'nianjradeTable',
+        //     meta: { title: '行政班' }
+        //   }
+        // ]
+      },
+      {
+        path: 'subjectAnalysis',
+        component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/index'), // Parent router-view
+        name: 'banzhurenkemufenxi',
+        meta: { title: '科目分析' },
+        alwaysShow: true, // will always show the root menu
+        children: [
+          { path: 'yuwen', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/yuwen/index'), name: 'yuwenfenxi', meta: { title: '语文' }},
+          { path: 'shuxue', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/shuxue/index'), name: 'shuxuefenxi', meta: { title: '数学' }},
+          { path: 'yingyu', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/yingyu/index'), name: 'yingyufenxi', meta: { title: '英语' }},
+          { path: 'wuli', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/wuli/index'), name: 'wulifenxi', meta: { title: '物理' }},
+          { path: 'huaxue', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/huaxue/index'), name: 'huaxuefenxi', meta: { title: '化学' }},
+          { path: 'shengwu', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/shengwu/index'), name: 'shengwufenxi', meta: { title: '生物' }},
+          { path: 'lishi', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/lishi/index'), name: 'lishifenxi', meta: { title: '历史' }},
+          { path: 'dili', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/dili/index'), name: 'dilifenxi', meta: { title: '地理' }},
+          { path: 'zhengzhi', component: () => import('@/views/banzhurenTeacherGradeReport/subjectAnalysis/zhengzhi/index'), name: 'zhengzhifenxi', meta: { title: '政治' }}
+        ]
+      },
+      {
+        path: 'subjectCompare',
+        component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/index'), // Parent router-view
+        name: 'banzhurenkemuduibi',
+        meta: { title: '科目对比' },
+        alwaysShow: true, // will always show the root menu
+        children: [
+          { path: 'yuwen', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/yuwen/index'), name: 'yuwenduibi', meta: { title: '语文' }},
+          { path: 'shuxue', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/shuxue/index'), name: 'shuxueduibi', meta: { title: '数学' }},
+          { path: 'yingyu', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/yingyu/index'), name: 'yingyuduibi', meta: { title: '英语' }},
+          { path: 'wuli', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/wuli/index'), name: 'wuliduibi', meta: { title: '物理' }},
+          { path: 'huaxue', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/huaxue/index'), name: 'huaxueduibi', meta: { title: '化学' }},
+          { path: 'shengwu', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/shengwu/index'), name: 'shengwuduibi', meta: { title: '生物' }},
+          { path: 'lishi', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/lishi/index'), name: 'lishiduibi', meta: { title: '历史' }},
+          { path: 'dili', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/dili/index'), name: 'diliduibi', meta: { title: '地理' }},
+          { path: 'zhengzhi', component: () => import('@/views/banzhurenTeacherGradeReport/subjectCompare/zhengzhi/index'), name: 'zhengzhiduibi', meta: { title: '政治' }}
+        ]
+      },
+      // {
+      //   path: 'gradeProfiles',
+      //   component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/index'), // Parent router-view
+      //   name: 'nianjiikaung',
+      //   meta: { title: '年级概况' },
+      //   alwaysShow: true, // will always show the root menu
+      //   children: [
+      //     { path: 'gradeScoreTable', component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/gradeScoreTable/index'), name: 'nianjichengjidan', meta: { title: '年级成绩单' }},
+      //     { path: 'singleSubjectTable', component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/singleSubjectTable/index'), name: 'dankechengjidan', meta: { title: '单科成绩单' }}
+      //   ]
+      // },
+      {
+        path: 'gradeAnalysis',
+        component: () => import('@/views/banzhurenTeacherGradeReport/gradeAnalysis/index'), // Parent router-view
+        name: 'nianjigaikaung',
+        meta: { title: '年级分析' },
+        alwaysShow: true, // will always show the root menu
+        children: [
+          {
+            path: 'dangciGrade',
+            component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/index'), // Parent router-view
+            name: '当次成绩',
+            meta: { title: '当次成绩' },
+            alwaysShow: true, // will always show the root menu
+            children: [
+              { path: 'gradeScoreTable', component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/gradeScoreTable/index'), name: 'dangcinianji', meta: { title: '年级成绩单' }},
+              { path: 'singleSubjectTable', component: () => import('@/views/banzhurenTeacherGradeReport/gradeProfiles/singleSubjectTable/index'), name: 'dangcidanke', meta: { title: '单科成绩单' }}
+            ]
+          },
+          { path: 'gradeSixRates', component: () => import('@/views/banzhurenTeacherGradeReport/gradeAnalysis/gradeSixRates/index'), name: 'nianjiliulv', meta: { title: '年级六率' }},
+          { path: 'liciGrade', component: () => import('@/views/banzhurenTeacherGradeReport/gradeAnalysis/liciGrade/index'), name: 'licichengji', meta: { title: '历次成绩' }}
+        ]
+      }
+    ]
+  },
+
+  // 年级主任路由
   {
     path: '/gradereport',
     component: Layout,
@@ -227,7 +345,7 @@ export const asyncRoutes = [
     meta: {
       title: '成绩分析',
       icon: 'chart',
-      roles: ['系统管理员', '年级主任', '班主任'] // you can set roles in root nav
+      roles: ['系统管理员', '年级主任'] // you can set roles in root nav
     },
     children: [
       {
@@ -371,12 +489,28 @@ export const asyncRoutes = [
   {
     path: '/record',
     component: Layout,
+    redirect: '',
+    alwaysShow: true, // will always show the root menu
+    meta: {
+      title: '考试分析',
+      icon: 'form'
+    },
     children: [
       {
         path: 'index',
         // component: () => import('@/views/svg-icons/index'),
         name: 'jilu',
-        meta: { title: '考试分析', icon: 'form', noCache: true }
+        meta: { title: '试卷分析', noCache: true },
+        children: [
+          { path: 'qufendu', name: 'qufendu', meta: { title: '区分度' }},
+          { path: 'nanyidu', name: 'nanyidu', meta: { title: '难易度' }}
+        ]
+      },
+      {
+        path: 'zhishifenbu',
+        // component: () => import('@/views/svg-icons/index'),
+        name: '知识分布',
+        meta: { title: '知识分布', noCache: true }
       }
     ]
   },
@@ -384,12 +518,31 @@ export const asyncRoutes = [
   {
     path: '/summary',
     component: Layout,
+    redirect: '',
+    alwaysShow: true, // will always show the root menu
+    meta: {
+      title: '智能总结',
+      icon: 'excel'
+    },
+    children: [
+      { path: 'fenxibaogao', name: 'fenxibaogao', meta: { title: '分析报告' }},
+      { path: 'gexindaochu', name: 'gexindaochu', meta: { title: '个性导出' }}
+    ]
+  },
+  {
+    path: '/zhibiaoshuomign',
+    component: Layout,
+    redirect: '',
+    meta: {
+      title: '指标说明',
+      icon: 'excel'
+    },
     children: [
       {
-        path: 'zongjie',
-        // component: () => import('@/views/svg-icons/index'),
-        name: 'Icons',
-        meta: { title: '考试总结', icon: 'excel', noCache: true }
+        path: 'shuoming',
+        component: () => import('@/views/indecatorDescription/index'),
+        name: 'zhibaio',
+        meta: { title: '指标说明', icon: 'list', noCache: true }
       }
     ]
   },

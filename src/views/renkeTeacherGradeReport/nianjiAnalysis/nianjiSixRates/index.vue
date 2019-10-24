@@ -13,6 +13,11 @@
     <el-row style="padding-top: 20px">
       <grade-six-rates-table :all-grade-six-rates-data="allGradeSixRatesData" :table-header="tableInfo" :loading="loading" />
     </el-row>
+    <!--    <el-row style="padding-top: 20px">-->
+    <!--      <div class="title">-->
+    <!--        <span style="font-size: 25px;color: #2ac06d">—年级成绩六率各班级对比图—</span>-->
+    <!--      </div>-->
+    <!--    </el-row>-->
   </div>
 </template>
 
@@ -30,9 +35,9 @@ export default {
       tableInfo: [
         { prop: 'subjectname', lable: '学科' },
         { prop: 'classid', lable: '班级' },
-        { prop: 'studentName', lable: '人数' },
-        { prop: 'classId', lable: '平均分' },
-        { prop: 'coversionTotal', lable: '标准分' },
+        { prop: 'personsum', lable: '人数' },
+        { prop: 'scoreAvg', lable: '平均分' },
+        { prop: 'StandardDiviation', lable: '标准差' },
         { prop: 'highnum', lable: '高分人数' },
         { prop: 'highnumradio', lable: '高分率' },
         { prop: 'excellentstudents', lable: '优秀人数' },

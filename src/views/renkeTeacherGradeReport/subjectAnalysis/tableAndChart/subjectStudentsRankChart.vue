@@ -1,6 +1,51 @@
 <template>
   <div class="app-container">
-    <div id="student" style="width:1200px;height: 400px;margin-left: 11%" />
+    <el-row>
+      <el-col :span="16">
+        <div id="student" style="width:800%;height: 300px;" />
+      </el-col>
+      <el-col :span="8">
+        <div class="card">
+          <el-card class="box-card-two">
+            <div slot="header" class="clearfix">
+              <span>高分学生名单</span>
+              <el-button style="float: right; padding: 3px 0" type="text">切换</el-button>
+            </div>
+            <div class="mingdan">
+              <el-table
+                :data="tableDataTwo"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="number"
+                  align="center"
+                  label="考号"
+                  width="85"
+                />
+                <el-table-column
+                  prop="class"
+                  align="center"
+                  label="班级"
+                  width="85"
+                />
+                <el-table-column
+                  prop="name"
+                  align="center"
+                  label="姓名"
+                  width="85"
+                />
+                <el-table-column
+                  prop="score"
+                  align="center"
+                  label="分数"
+                />
+              </el-table>
+            </div>
+          </el-card>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -18,6 +63,27 @@ export default {
   },
   data() {
     return {
+      tableDataTwo: [{
+        number: '65734322',
+        class: 'A1-1',
+        name: '张昊',
+        score: '100'
+      }, {
+        number: '98452321',
+        class: 'A1-1',
+        name: '刘彦辰',
+        score: '100'
+      }, {
+        number: '48292322',
+        class: 'A1-1',
+        name: '卢昊',
+        score: '100'
+      }, {
+        number: '44532212',
+        class: 'A1-1',
+        name: '杜鹏程',
+        score: '100'
+      }],
       id: window.localStorage.getItem('id'),
       subject: window.localStorage.getItem('subject'),
       option: {

@@ -131,7 +131,7 @@
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
-                  <subject-trend-chart />
+                  <subject-trend-chart ref="trend" :class-value="classValue" />
                 </el-row>
               </el-col>
             </el-row>
@@ -149,7 +149,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-six-rate-chart />
+              <subject-six-rate-chart ref="mysix" :class-value="classValue" />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -171,7 +171,7 @@ import subjectTrendChart from '@/views/renkeTeacherGradeReport/subjectAnalysis/t
 import subjectInTermSixRatesTable from '@/views/renkeTeacherGradeReport/subjectAnalysis/tableAndChart/subjectInTermSixRatesTable'
 import subjectSixRateChart from '@/views/renkeTeacherGradeReport/subjectAnalysis/tableAndChart/subjectSixRateChart'
 import { getTeacherInformationData } from '@/api/homepageData'
-import { getSubjectAnaGradeTableData, getSubjectCompareSchoolData } from '@/api/subjectAnalysisData'
+import { getSubjectAnaGradeTableData, getSubjectCompareSchoolData, getInTermSuccessiveGradeAverageData, getInTermSuccessiveSixRatesData } from '@/api/subjectAnalysisData'
 export default {
   name: 'WuliAnalysis',
   components: {
@@ -197,7 +197,6 @@ export default {
       inTermSixRatesData: [],
       id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'index', lable: '序号' },
         { prop: 'machinecard', lable: '考号' },
         { prop: 'studentname', lable: '姓名' },
         { prop: 'subject', lable: '科目' },
@@ -225,28 +224,28 @@ export default {
         { prop: 'mediumratio', lable: '超均率' }
       ],
       tableInfoThree: [
-        { prop: 'id', lable: '日期' },
-        { prop: 'studentMachineCard', lable: '考试名称' },
-        { prop: 'studentName', lable: '平均分' },
-        { prop: 'classId', lable: '标准差' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examname', lable: '考试名称' },
+        { prop: 'scoreAvg', lable: '平均分' },
+        { prop: 'StandardDiviation', lable: '标准差' }
       ],
       tableInfoFour: [
-        { prop: 'id', lable: '日期' },
-        { prop: 'studentMachineCard', lable: '考试名称' },
-        { prop: 'studentName', lable: '学科' },
-        { prop: 'classId', lable: '年级人数' },
-        { prop: 'coversionTotal', lable: '高分人数' },
-        { prop: 'classIndex', lable: '高分率' },
-        { prop: 'advancefall', lable: '优秀人数' },
-        { prop: 'yuwenScore', lable: '优秀率' },
-        { prop: 'shuxueScore', lable: '良好人数' },
-        { prop: 'yingyuScore', lable: '良好率' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '低分人数' },
-        { prop: 'shengwuCoversion', lable: '低分率' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examtype', lable: '考试名称' },
+        { prop: 'subjectname', lable: '学科' },
+        { prop: 'personsum', lable: '班级人数' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ],
       activeName: 'first',
       options: []
@@ -256,6 +255,12 @@ export default {
     this.firstGetTeacherData()
     setTimeout(() => {
       this.getGradeTableData()
+    }, 1000)
+    setTimeout(() => {
+      this.getInTermSuccessiveAvrData()
+    }, 1000)
+    setTimeout(() => {
+      this.getInTermSuccessiveSixData()
     }, 1000)
     this.getSubjectSixRatesData()
   },
@@ -309,6 +314,28 @@ export default {
         this.allGradeSixRatesData = response.data.info
       })
     },
+    getInTermSuccessiveAvrData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classValue
+      }
+      getInTermSuccessiveGradeAverageData(prams).then(response => {
+        console.log('测试是否拿到学期内历次均分数据')
+        console.log(response.data)
+        this.termAverageData = response.data.info
+      })
+    },
+    getInTermSuccessiveSixData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classValue
+      }
+      getInTermSuccessiveSixRatesData(prams).then(response => {
+        console.log('测试是否拿到学期内历次六率数据')
+        console.log(response.data)
+        this.inTermSixRatesData = response.data.info
+      })
+    },
     changeClassData: function(val) {
       let obj = {}
       obj = this.options.find((item) => {
@@ -319,6 +346,7 @@ export default {
       console.log('科目分析获取到的班级名' + getName)
       this.classValue = getName
       this.getGradeTableData()
+      this.getInTermSuccessiveAvrData()
       // this.$refs.important.getFrontFiveData()
       // this.$refs.important.getBehindFiveData()
       setTimeout(() => {
@@ -326,6 +354,8 @@ export default {
         this.$refs.important.getBehindFiveData()
         this.$refs.rankchart.getChartData()
         this.$refs.ranktable.getRankTableData()
+        this.$refs.trend.updateChart()
+        this.$refs.mysix.updateChart()
       }, 500)
     }
   }

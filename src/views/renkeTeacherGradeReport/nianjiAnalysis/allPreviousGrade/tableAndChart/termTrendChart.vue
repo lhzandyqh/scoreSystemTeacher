@@ -43,7 +43,7 @@ export default {
     this.getData()
     setTimeout(() => {
       this.initChart()
-    }, 200)
+    }, 1000)
   },
   methods: {
     initChart: function() {

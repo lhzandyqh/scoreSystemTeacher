@@ -6,6 +6,9 @@
       <navbar />
       <tags-view />
       <app-main />
+      <div class="copyrightContainer">
+        <span style="font-size: 12px">Copyright&nbsp;&nbsp;&nbsp;中科智禾教育大数据中心   ©2019</span>
+      </div>
     </div>
   </div>
 </template>
@@ -67,5 +70,10 @@ export default {
     height: 100%;
     position: absolute;
     z-index: 999;
+  }
+  .copyrightContainer{
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
   }
 </style>

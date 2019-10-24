@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row style="padding-top: 20px">
-      <div id="sixrate" style="width:1200px;height: 400px;margin-left: 11%" />
+      <div id="sixrate" style="width:1200px;height: 400px;margin-left: 0%" />
     </el-row>
   </div>
 </template>

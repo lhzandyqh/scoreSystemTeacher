@@ -1,18 +1,30 @@
 <template>
   <div class="app-container">
     <el-row>
-      <span style="font-size: 20px;font-weight: bolder">学科均分起势图</span>
+      <span style="font-size: 17px;">学科均分起势图</span>
     </el-row>
-    <el-row style="padding-top: 20px">
-      <el-select v-model="value" placeholder="请选择科目">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-    </el-row>
+    <!--    <el-row style="padding-top: 20px" :gutter="20">-->
+    <!--      <el-col :span="4">-->
+    <!--        <el-select v-model="value" placeholder="请选择科目" @change="changeLocationValue">-->
+    <!--          <el-option-->
+    <!--            v-for="item in options"-->
+    <!--            :key="item.value"-->
+    <!--            :label="item.label"-->
+    <!--            :value="item.value"-->
+    <!--          />-->
+    <!--        </el-select>-->
+    <!--      </el-col>-->
+    <!--      <el-col :span="4">-->
+    <!--        <el-select v-model="value2" placeholder="请选择分值类别" @change="changeLocationValue">-->
+    <!--          <el-option-->
+    <!--            v-for="item in options2"-->
+    <!--            :key="item.value"-->
+    <!--            :label="item.label"-->
+    <!--            :value="item.value"-->
+    <!--          />-->
+    <!--        </el-select>-->
+    <!--      </el-col>-->
+    <!--    </el-row>-->
     <el-row style="padding-top: 20px">
       <div id="average" style="width:100%;height: 400px" />
     </el-row>
@@ -20,6 +32,7 @@
 </template>
 
 <script>
+import { getHomeClassAverageData } from '@/api/banzhurenGetData'
 import echarts from 'echarts'
 require('echarts/theme/macarons')
 export default {
@@ -27,6 +40,18 @@ export default {
   data() {
     return {
       value: '',
+      id: window.localStorage.getItem('id'),
+      value2: '',
+      chartData: [],
+      options2: [
+        {
+          value: '选项1',
+          label: '原始分'
+        }, {
+          value: '选项2',
+          label: '占位分'
+        }
+      ],
       options: [{
         value: '选项1',
         label: '语文'
@@ -75,7 +100,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['1班', '2班', '3班', '4班', '5班', '6班', '7班', '8班', '9班', '10班', '11班', '12班']
+            data: []
           }
         ],
         yAxis: [
@@ -87,7 +112,7 @@ export default {
           {
             name: '班平均分',
             type: 'bar',
-            data: [80, 79, 70, 82, 86, 77, 86, 92, 86, 70, 64, 83],
+            data: [],
             markPoint: {
               data: [
                 { type: 'max', name: '最大值' },
@@ -105,12 +130,35 @@ export default {
     }
   },
   mounted() {
+    this.getChartData()
     this.initChart()
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('average'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    compare: function(property) {
+      return function(obj1, obj2) {
+        return obj1[property] - obj2[property]
+      }
+    },
+    getChartData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getHomeClassAverageData(prams).then(response => {
+        console.log('检查班主任首页的平均分数据')
+        console.log(response.data.info)
+        this.chartData = response.data.info.sort(this.compare('classname'))
+        console.log('排序后')
+        console.log(this.chartData)
+        for (let i = 0; i < this.chartData.length - 1; i++) {
+          this.option.xAxis[0].data.push(this.chartData[i].classname + '班')
+          this.option.series[0].data.push(this.chartData[i].subjectClassAvg)
+        }
+        this.initChart()
+      })
     }
   }
 }

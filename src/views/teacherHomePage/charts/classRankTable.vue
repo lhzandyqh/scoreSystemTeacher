@@ -2,7 +2,6 @@
   <div class="app-container">
     <el-table
       :data="tableData"
-      height="300"
       style="width: 100%"
     >
       <el-table-column

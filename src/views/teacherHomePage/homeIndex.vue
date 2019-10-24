@@ -5,7 +5,12 @@
         <!--        <span style="font-size: 30px;font-weight: bolder;color: #27ba6e">-最新成绩信息-</span>-->
       </div>
     </el-row>
-    <div v-if="role === '政治任课教师'|| role === '班主任'|| role === '物理任课教师' ">
+    <el-row v-if="role === '班主任'">
+      <el-col :span="24">
+        <banzhuren-rank-chart />
+      </el-col>
+    </el-row>
+    <div v-if="role === '政治任课教师'|| role === '物理任课教师' ">
       <el-row>
         <el-col :span="24">
           <jiaoshi-class-rank-chart />
@@ -48,6 +53,7 @@
 
 <script>
 import rankDistributionChart from '@/views/teacherHomePage/charts/rankDistributionChart'
+import banzhurenRankChart from '@/views/teacherHomePage/charts/banzhurenRankChart'
 // import classRankTable from '@/views/teacherHomePage/charts/classRankTable'
 import subjectAverageChart from '@/views/teacherHomePage/charts/subjectAverageChart'
 import classStatisticChart from '@/views/teacherHomePage/charts/classStatisticChart'
@@ -57,7 +63,7 @@ import { getTeacherInformationData } from '@/api/homepageData'
 // import classRankTable from '@views/fuyongTable/classRankTable'
 export default {
   name: 'HomeIndex',
-  components: { rankDistributionChart, subjectAverageChart, classStatisticChart, jiaoshiClassRankChart },
+  components: { rankDistributionChart, subjectAverageChart, classStatisticChart, jiaoshiClassRankChart, banzhurenRankChart },
   data() {
     return {
       role: window.localStorage.getItem('userRole'),
@@ -75,6 +81,7 @@ export default {
       getTeacherInformationData(prams).then(response => {
         console.log('测试是否能够拿到老师的个人信息')
         console.log(response.data)
+        window.localStorage.setItem('mysubject', response.data.info.subjectName)
       })
     }
   }

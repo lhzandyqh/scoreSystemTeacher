@@ -5,8 +5,8 @@
       <!--      <img src="../../assets/jpg/logofinal.png" style="width: 10%;height: 18%;" class="login-logo" alt>-->
       <!--      <img src="../../assets/jpg/zhongke.png" style="width: 10%;height: 18%;padding-left: 7%" class="login-logo" alt>-->
       <!--      <img src="../../assets/jpg/login_b_t.jpg" class="login-bg" alt>-->
-      <img :src="require('./img/logofinal.png')" style="width: 10%;height: 18%;" class="login-logo" alt>
-      <img :src="require('./img/zhongke.png')" style="width: 20%;height: 18%;padding-left: 7%" class="login-logo" alt>
+      <!--      <img :src="require('./img/logofinal.png')" style="width: 10%;height: 18%;" class="login-logo" alt>-->
+      <!--      <img :src="require('./img/zhongke.png')" style="width: 20%;height: 18%;padding-left: 7%" class="login-logo" alt>-->
       <img :src="require('./img/login_b_t.jpg')" class="login-bg" alt>
       <div class="login-input" style="opacity: .9;">
         <div class="loginTitle">用户登录</div>
@@ -182,7 +182,7 @@ export default {
   .login-all {
     position: relative;
     width: 100%;
-    height: 800px;
+    height: 700px;
   }
   .login-center {
     text-align: center;

@@ -3,7 +3,7 @@
     <el-row>
       <div class="mainContent">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="物理科目六率对比" name="first">
+          <el-tab-pane label="科目六率对比" name="first">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -11,7 +11,7 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—物理科目六率对比表—</span>
+                <span style="font-size: 25px;color: #2ac06d">—科目六率对比表—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
@@ -26,7 +26,7 @@
               <subject-six-rates-comparison-chart />
             </el-row>
           </el-tab-pane>
-          <el-tab-pane label="物理单科前N名上线分布对比" name="second">
+          <el-tab-pane label="单科前N名上线分布对比" name="second">
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
@@ -71,27 +71,27 @@ export default {
       activeName: 'first',
       id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'id', lable: '年级' },
+        // { prop: 'id', lable: '年级' },
         { prop: 'subjectname', lable: '科目' },
         { prop: 'classid', lable: '班级' },
         { prop: 'highnum', lable: '高分人数' },
         { prop: 'highnumradio', lable: '高分率' },
-        { prop: 'coversionTotal', lable: '高分率排名' },
+        // { prop: 'coversionTotal', lable: '高分率排名' },
         { prop: 'excellentstudents', lable: '优秀人数' },
         { prop: 'excellentratio', lable: '优秀率' },
-        { prop: 'advancefall', lable: '优秀率排名' },
+        // { prop: 'advancefall', lable: '优秀率排名' },
         { prop: 'goodnumbers', lable: '良好人数' },
         { prop: 'goodratio', lable: '良好率' },
-        { prop: 'yingyuScore', lable: '良好率排名' },
+        // { prop: 'yingyuScore', lable: '良好率排名' },
         { prop: 'passnumbers', lable: '及格人数' },
         { prop: 'passratio', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '及格率排名' },
+        // { prop: 'huaxueCoversion', lable: '及格率排名' },
         { prop: 'failnum', lable: '低分人数' },
         { prop: 'failratio', lable: '低分率' },
-        { prop: 'diliCoversion', lable: '低分率排名' },
+        // { prop: 'diliCoversion', lable: '低分率排名' },
         { prop: 'beyondnum', lable: '超均人数' },
-        { prop: 'beyondradio', lable: '超均率' },
-        { prop: 'zhengzhiCoversion', lable: '超均率排名' }
+        { prop: 'beyondradio', lable: '超均率' }
+        // { prop: 'zhengzhiCoversion', lable: '超均率排名' }
       ],
       tableInfoTwo: [
         { prop: 'physics', lable: '年级' },
