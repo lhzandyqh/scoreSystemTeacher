@@ -20,7 +20,7 @@
         style="margin-top:20px;"
         :current-page="currentPage"
         :page-sizes="[10, 20, 40]"
-        :page-size="100"
+        :page-size="10"
         layout="total, sizes, prev, pager, next, jumper"
         :total="singleScoreData.length"
         @size-change="handleSizeChange"

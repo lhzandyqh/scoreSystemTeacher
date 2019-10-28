@@ -445,28 +445,28 @@ export const asyncRoutes = [
           { path: '/gradereport/subjectCompare/dili', component: () => import('@/views/teacherGradeReport/subjectCompare/dili/diliCompare'), name: 'dilitwo', meta: { title: '地理', roles: ['系统管理员', '年级主任', '班主任', '地理任课教师'] }}
         ]
       },
-      {
-        path: 'gradeprofiles',
-        component: () => import('@/views/teacherGradeReport/gradeProfiles/index'),
-        name: 'd',
-        meta: {
-          title: '年级概况',
-          roles: ['系统管理员', '年级主任', '班主任',
-            '语文任课教师', '数学任课教师', '英语任课教师',
-            '物理任课教师', '化学任课教师', '生物任课教师',
-            '政治任课教师', '历史任课教师', '地理任课教师']
-        },
-        children: [
-          { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
-            '语文任课教师', '数学任课教师', '英语任课教师',
-            '物理任课教师', '化学任课教师', '生物任课教师',
-            '政治任课教师', '历史任课教师', '地理任课教师'] },
-          { path: 'singleSubject', component: () => import('@/views/teacherGradeReport/gradeProfiles/singleSubjectReport/singleSubject'), name: 'singleSubject', meta: { title: '单科成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
-            '语文任课教师', '数学任课教师', '英语任课教师',
-            '物理任课教师', '化学任课教师', '生物任课教师',
-            '政治任课教师', '历史任课教师', '地理任课教师'] }
-        ]
-      },
+      // {
+      //   path: 'gradeprofiles',
+      //   component: () => import('@/views/teacherGradeReport/gradeProfiles/index'),
+      //   name: 'd',
+      //   meta: {
+      //     title: '年级概况',
+      //     roles: ['系统管理员', '年级主任', '班主任',
+      //       '语文任课教师', '数学任课教师', '英语任课教师',
+      //       '物理任课教师', '化学任课教师', '生物任课教师',
+      //       '政治任课教师', '历史任课教师', '地理任课教师']
+      //   },
+      //   children: [
+      //     { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+      //       '语文任课教师', '数学任课教师', '英语任课教师',
+      //       '物理任课教师', '化学任课教师', '生物任课教师',
+      //       '政治任课教师', '历史任课教师', '地理任课教师'] },
+      //     { path: 'singleSubject', component: () => import('@/views/teacherGradeReport/gradeProfiles/singleSubjectReport/singleSubject'), name: 'singleSubject', meta: { title: '单科成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+      //       '语文任课教师', '数学任课教师', '英语任课教师',
+      //       '物理任课教师', '化学任课教师', '生物任课教师',
+      //       '政治任课教师', '历史任课教师', '地理任课教师'] }
+      //   ]
+      // },
       {
         path: 'gradeanalysis',
         component: () => import('@/views/teacherGradeReport/gradeAnalysis/index'),
@@ -479,6 +479,28 @@ export const asyncRoutes = [
             '政治任课教师', '历史任课教师', '地理任课教师']
         },
         children: [
+          {
+            path: 'gradeprofiles',
+            component: () => import('@/views/teacherGradeReport/gradeProfiles/index'),
+            name: 'd',
+            meta: {
+              title: '当次成绩',
+              roles: ['系统管理员', '年级主任', '班主任',
+                '语文任课教师', '数学任课教师', '英语任课教师',
+                '物理任课教师', '化学任课教师', '生物任课教师',
+                '政治任课教师', '历史任课教师', '地理任课教师']
+            },
+            children: [
+              { path: 'gradeScore', component: () => import('@/views/teacherGradeReport/gradeProfiles/gradeScoreReport/gradeScore'), name: 'gradeScore', meta: { title: '年级成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+                '语文任课教师', '数学任课教师', '英语任课教师',
+                '物理任课教师', '化学任课教师', '生物任课教师',
+                '政治任课教师', '历史任课教师', '地理任课教师'] },
+              { path: 'singleSubject', component: () => import('@/views/teacherGradeReport/gradeProfiles/singleSubjectReport/singleSubject'), name: 'singleSubject', meta: { title: '单科成绩单' }, roles: ['系统管理员', '年级主任', '班主任',
+                '语文任课教师', '数学任课教师', '英语任课教师',
+                '物理任课教师', '化学任课教师', '生物任课教师',
+                '政治任课教师', '历史任课教师', '地理任课教师'] }
+            ]
+          },
           { path: 'gradeSixRates', component: () => import('@/views/teacherGradeReport/gradeAnalysis/gradeSixRates/gradeRates'), name: 'gradeSixRates', meta: { title: '年级六率' }},
           { path: 'allPreviousGrade', component: () => import('@/views/teacherGradeReport/gradeAnalysis/allPreviousGrade/allPrevious'), name: 'allPreviousGrade', meta: { title: '历次成绩' }}
         ]

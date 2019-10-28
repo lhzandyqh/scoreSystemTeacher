@@ -6,7 +6,7 @@
           <span style="font-weight: bolder">请选择班级</span>
         </div>
         <div class="select">
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value" placeholder="请选择" @change="getScoreTableData">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -201,6 +201,7 @@ import inTermSixRatesTable from '@/views/teacherGradeReport/classAnalyze/xingzhe
 import termGradeAverageTable from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/termGradeAverageTable'
 import xingZhenTrendChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/xingZhenTrendChart'
 import xingzhenSixRateChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/xingzhenSixRateChart'
+import { getBehindClassDataBySubject, getXingZhengScoreTable } from '@/api/nianjizhurenGetData'
 export default {
   name: 'Xingzheng',
   components: {
@@ -220,85 +221,9 @@ export default {
   },
   data() {
     return {
-      allGradeTableData: [
-        {
-          xuhao: '1',
-          kaohao: '34521',
-          name: '陈元元',
-          banji: '3',
-          total: '567',
-          classrank: '23',
-          schoolrank: '134',
-          jinbu: '4',
-          yuwen: '87',
-          shuxue: '97',
-          yingyu: '80',
-          three: '274',
-          wuli: '86',
-          huaxue: '78',
-          shengwu: '80',
-          lishi: '0',
-          dili: '0',
-          zhengzhi: '0'
-        }, {
-          xuhao: '2',
-          kaohao: '34521',
-          name: '罗正',
-          banji: '3',
-          total: '567',
-          classrank: '23',
-          schoolrank: '134',
-          jinbu: '4',
-          yuwen: '87',
-          shuxue: '97',
-          yingyu: '80',
-          three: '274',
-          wuli: '86',
-          huaxue: '78',
-          shengwu: '80',
-          lishi: '0',
-          dili: '0',
-          zhengzhi: '0'
-        }, {
-          xuhao: '3',
-          kaohao: '34521',
-          name: '王小虎',
-          banji: '3',
-          total: '567',
-          classrank: '23',
-          schoolrank: '134',
-          jinbu: '4',
-          yuwen: '87',
-          shuxue: '97',
-          yingyu: '80',
-          three: '274',
-          wuli: '86',
-          huaxue: '78',
-          shengwu: '80',
-          lishi: '0',
-          dili: '0',
-          zhengzhi: '0'
-        }, {
-          xuhao: '4',
-          kaohao: '34521',
-          name: '欧成',
-          banji: '3',
-          total: '567',
-          classrank: '23',
-          schoolrank: '134',
-          jinbu: '4',
-          yuwen: '87',
-          shuxue: '97',
-          yingyu: '80',
-          three: '274',
-          wuli: '86',
-          huaxue: '78',
-          shengwu: '80',
-          lishi: '0',
-          dili: '0',
-          zhengzhi: '0'
-        }
-      ],
+      subject: '语文',
+      id: window.localStorage.getItem('id'),
+      allGradeTableData: [],
       allGradeSixRatesData: [{
         kemu: '语文',
         leibie: '行政',
@@ -477,27 +402,27 @@ export default {
         }
       ],
       activeName: 'first',
-      value: '选项1',
+      value: '1',
       rateValue: '',
       tableInfo: [
         { prop: 'xuhao', lable: '序号' },
-        { prop: 'kaohao', lable: '考号' },
-        { prop: 'name', lable: '姓名' },
-        { prop: 'banji', lable: '班级/行政班' },
-        { prop: 'total', lable: '总分' },
-        { prop: 'classrank', lable: '班名次' },
-        { prop: 'schoolrank', lable: '校名次' },
+        { prop: 'studentNumber', lable: '考号' },
+        { prop: 'studentName', lable: '姓名' },
+        { prop: 'classId', lable: '班级/行政班' },
+        { prop: 'coversionTotal', lable: '总分' },
+        { prop: 'classIndex', lable: '班名次' },
+        { prop: 'schoolIndex', lable: '校名次' },
         { prop: 'jinbu', lable: '进步/后退' },
-        { prop: 'yuwen', lable: '语文' },
-        { prop: 'shuxue', lable: '数学' },
-        { prop: 'yingyu', lable: '英语' },
+        { prop: 'yuwenScore', lable: '语文' },
+        { prop: 'shuxueScore', lable: '数学' },
+        { prop: 'yingyuScore', lable: '英语' },
         { prop: 'three', lable: '三科总分' },
-        { prop: 'wuli', lable: '物理' },
-        { prop: 'huaxue', lable: '化学' },
-        { prop: 'shengwu', lable: '生物' },
-        { prop: 'lishi', lable: '历史' },
-        { prop: 'dili', lable: '地理' },
-        { prop: 'zhengzhi', lable: '政治' }
+        { prop: 'wuliCoversion', lable: '物理' },
+        { prop: 'huaxueCoversion', lable: '化学' },
+        { prop: 'shengwuCoversion', lable: '生物' },
+        { prop: 'lishiCoversion', lable: '历史' },
+        { prop: 'diliCoversion', lable: '地理' },
+        { prop: 'diliCoversion', lable: '政治' }
       ],
       tableInfoTwo: [
         { prop: 'kemu', lable: '学科' },
@@ -542,22 +467,7 @@ export default {
         { prop: 'chaojun', lable: '超均人数' },
         { prop: 'chaojunlv', lable: '超均率' }
       ],
-      options: [{
-        value: '选项1',
-        label: '一班'
-      }, {
-        value: '选项2',
-        label: '二班'
-      }, {
-        value: '选项3',
-        label: '三班'
-      }, {
-        value: '选项4',
-        label: '四班'
-      }, {
-        value: '选项5',
-        label: '五班'
-      }],
+      options: [],
       optionsTwo: [
         {
           value: '选项0',
@@ -581,9 +491,51 @@ export default {
         }]
     }
   },
+  mounted() {
+    this.firstGetClass()
+    setTimeout(() => {
+      this.getScoreTable()
+    }, 1000)
+  },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event)
+    },
+    firstGetClass: function() {
+      const prams = {
+        userID: this.id,
+        subjectname: this.subject
+      }
+      getBehindClassDataBySubject(prams).then(response => {
+        console.log('测试年级主任行政班获取班级数据')
+        console.log(response.data)
+        const afterSortData = response.data.classSet.sort(this.sortData)
+        console.log(afterSortData)
+        for (let i = 0; i < afterSortData.length; i++) {
+          const obj = {
+            value: response.data.classSet[i],
+            label: response.data.classSet[i] + '班'
+          }
+          this.options.push(obj)
+        }
+      })
+    },
+    getScoreTable: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.value
+      }
+      getXingZhengScoreTable(prams).then(response => {
+        console.log('测试年级主任行政班成绩单的数据')
+        console.log(response.data)
+        this.allGradeTableData = response.data.info
+      })
+    },
+    getScoreTableData: function() {
+      this.getScoreTable()
+    },
+    sortData: function(a, b) {
+      return a - b
     }
   }
 }

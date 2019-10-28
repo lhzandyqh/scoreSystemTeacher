@@ -7,21 +7,21 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 25px;font-weight: bolder;color: #2ac06d">-年级历次成绩分析-</span>
+        <span style="font-size: 25px;color: #2ac06d">-年级历次成绩分析-</span>
       </div>
     </el-row>
-    <el-row style="padding-top: 30px">
-      <el-col :span="4">
-        <el-select v-model="value" placeholder="请选择科目">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </el-col>
-    </el-row>
+    <!--    <el-row style="padding-top: 30px">-->
+    <!--      <el-col :span="4">-->
+    <!--        <el-select v-model="value" placeholder="请选择科目">-->
+    <!--          <el-option-->
+    <!--            v-for="item in options"-->
+    <!--            :key="item.value"-->
+    <!--            :label="item.label"-->
+    <!--            :value="item.value"-->
+    <!--          />-->
+    <!--        </el-select>-->
+    <!--      </el-col>-->
+    <!--    </el-row>-->
     <el-row style="paddig-top: 20px">
       <el-col :span="12">
         <el-row style="padding-top: 20px">
@@ -68,6 +68,7 @@ import termGradeAverageTable from '@/views/teacherGradeReport/gradeAnalysis/allP
 import termTrendChart from '@/views/teacherGradeReport/gradeAnalysis/allPreviousGrade/tableAndChart/termTrendChart'
 import inTermSixRatesTable from '@/views/teacherGradeReport/gradeAnalysis/allPreviousGrade/tableAndChart/inTermSixRatesTable'
 import inTermSixRatesChart from '@/views/teacherGradeReport/gradeAnalysis/allPreviousGrade/tableAndChart/inTermSixRatesChart'
+import { getGradeLiciAverageData, getLiciSixRatesData } from '@/api/banzhurenGetData'
 export default {
   name: 'AllPrevious',
   components: { inTermSixRatesTable, termGradeAverageTable, termTrendChart, inTermSixRatesChart },
@@ -75,29 +76,30 @@ export default {
     return {
       termAverageData: [],
       inTermSixRatesData: [],
+      id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'id', lable: '日期' },
-        { prop: 'studentMachineCard', lable: '考试名称' },
-        { prop: 'studentName', lable: '平均分' },
-        { prop: 'classId', lable: '标准差' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examname', lable: '考试名称' },
+        { prop: 'scoreAvg', lable: '平均分' },
+        { prop: 'StandardDiviation', lable: '标准差' }
       ],
       tableInfoTwo: [
-        { prop: 'id', lable: '日期' },
-        { prop: 'studentMachineCard', lable: '考试名称' },
-        { prop: 'studentName', lable: '学科' },
-        { prop: 'classId', lable: '年级人数' },
-        { prop: 'coversionTotal', lable: '高分人数' },
-        { prop: 'classIndex', lable: '高分率' },
-        { prop: 'advancefall', lable: '优秀人数' },
-        { prop: 'yuwenScore', lable: '优秀率' },
-        { prop: 'shuxueScore', lable: '良好人数' },
-        { prop: 'yingyuScore', lable: '良好率' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '低分人数' },
-        { prop: 'shengwuCoversion', lable: '低分率' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examtype', lable: '考试名称' },
+        { prop: 'subjectname', lable: '学科' },
+        { prop: 'personsum', lable: '年级人数' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ],
       value: '',
       options: [{
@@ -128,6 +130,26 @@ export default {
         value: '地理',
         label: '地理'
       }]
+    }
+  },
+  mounted() {
+    this.getTableData()
+  },
+  methods: {
+    getTableData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getGradeLiciAverageData(prams).then(response => {
+        console.log('测试班主任年级均分数据')
+        console.log(response.data)
+        this.termAverageData = response.data.info
+      })
+      getLiciSixRatesData(prams).then(response => {
+        console.log('测试班主任年级六率')
+        console.log(response.data)
+        this.inTermSixRatesData = response.data.info
+      })
     }
   }
 }

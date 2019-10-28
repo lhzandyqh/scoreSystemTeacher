@@ -54,7 +54,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -66,7 +66,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -78,7 +78,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -90,7 +90,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -102,7 +102,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -114,7 +114,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -140,6 +140,8 @@ export default {
         console.log('科目对比图tutut测试是否拿到六率数据')
         console.log(response.data)
         const classArray = []
+        console.log('看一下能不能排序')
+        console.log(response.data.info.sort(this.compare('classid')))
         for (var i = 0; i < response.data.info.length; i++) {
           classArray.push(response.data.info[i].classid)
         }
@@ -158,6 +160,13 @@ export default {
           this.initChart()
         }, 2000)
       })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value2 - value1
+      }
     }
   }
 }

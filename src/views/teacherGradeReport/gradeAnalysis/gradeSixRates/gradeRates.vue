@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { getGradeSixRatesData } from '@/api/banzhurenGetData'
 import gradeSixRatesTable from '@/views/teacherGradeReport/gradeAnalysis/gradeSixRates/tableAndChart/gradeSixRatesTable'
 export default {
   name: 'GradeRates',
@@ -24,25 +25,41 @@ export default {
   data() {
     return {
       allGradeSixRatesData: [],
+      id: window.localStorage.getItem('id'),
       tableInfo: [
-        { prop: 'id', lable: '学科' },
-        { prop: 'studentMachineCard', lable: '类别' },
-        { prop: 'studentName', lable: '人数' },
-        { prop: 'classId', lable: '平均分' },
-        { prop: 'coversionTotal', lable: '标准差' },
-        { prop: 'classIndex', lable: '高分人数' },
-        { prop: 'classIndex', lable: '高分率' },
-        { prop: 'advancefall', lable: '优秀人数' },
-        { prop: 'yuwenScore', lable: '优秀率' },
-        { prop: 'shuxueScore', lable: '良好人数' },
-        { prop: 'yingyuScore', lable: '良好率' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '低分人数' },
-        { prop: 'shengwuCoversion', lable: '低分率' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' }
+        { prop: 'subjectname', lable: '学科' },
+        { prop: 'leibie', lable: '类别' },
+        { prop: 'renshu', lable: '人数' },
+        { prop: 'scoreAvg', lable: '平均分' },
+        { prop: 'StandardDiviation', lable: '标准差' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ]
+    }
+  },
+  mounted() {
+    this.getTableData()
+  },
+  methods: {
+    getTableData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getGradeSixRatesData(prams).then(resposne => {
+        console.log('检查年级主任六率数据')
+        console.log(resposne.data)
+        this.allGradeSixRatesData = resposne.data.info
+      })
     }
   }
 }

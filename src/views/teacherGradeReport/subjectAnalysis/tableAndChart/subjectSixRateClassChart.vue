@@ -1,18 +1,30 @@
 <template>
   <div class="app-container">
     <el-row style="padding-top: 20px">
-      <div id="sixrate" style="width:1200px;height: 400px;margin-left: 11%" />
+      <div id="sixrate" style="width:1200px;height: 400px" />
     </el-row>
   </div>
 </template>
 
 <script>
 import echarts from 'echarts'
+import { getSubjectAnalysisClassCompareSchoolData } from '@/api/nianjizhurenGetData'
 require('echarts/theme/macarons')
 export default {
   name: 'SixRateClassChart',
+  props: {
+    subject: {
+      type: String,
+      required: true
+    },
+    classname: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
+      id: window.localStorage.getItem('id'),
       option: {
         tooltip: {
           trigger: 'axis',
@@ -48,8 +60,8 @@ export default {
             type: 'value',
             name: '比率',
             min: 0,
-            max: 100,
-            interval: 10,
+            max: 1,
+            interval: 0.05,
             axisLabel: {
               formatter: '{value}'
             }
@@ -58,8 +70,8 @@ export default {
             type: 'value',
             name: '比率',
             min: 0,
-            max: 100,
-            interval: 10,
+            max: 1,
+            interval: 0.05,
             axisLabel: {
               formatter: '{value}'
             }
@@ -69,25 +81,53 @@ export default {
           {
             name: '班比率',
             type: 'bar',
-            data: [83, 79, 90, 64, 87, 77]
+            data: []
           },
           {
-            name: '校平均比率',
+            name: '校比率',
             type: 'line',
             yAxisIndex: 1,
-            data: [77, 70, 80, 55, 73, 72]
+            data: []
           }
         ]
       }
     }
   },
   mounted() {
-    this.initChart()
+    this.getChartData()
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('sixrate'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    getChartData: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.classname,
+        subjectname: this.subject
+      }
+      getSubjectAnalysisClassCompareSchoolData(prams).then(response => {
+        console.log('年级主任测试班校对比图')
+        console.log(response.data.info)
+        this.option.series[0].data = []
+        this.option.series[1].data = []
+        this.option.series[0].data.push(response.data.info[1].highnumradio)
+        this.option.series[0].data.push(response.data.info[1].excellentratio)
+        this.option.series[0].data.push(response.data.info[1].goodratio)
+        this.option.series[0].data.push(response.data.info[1].passratio)
+        this.option.series[0].data.push(response.data.info[1].failratio)
+        this.option.series[0].data.push(response.data.info[1].beyondradio)
+        this.option.series[1].data.push(response.data.info[0].highnumradio)
+        this.option.series[1].data.push(response.data.info[0].excellentratio)
+        this.option.series[1].data.push(response.data.info[0].goodratio)
+        this.option.series[1].data.push(response.data.info[0].passratio)
+        this.option.series[1].data.push(response.data.info[0].failratio)
+        this.option.series[1].data.push(response.data.info[0].beyondradio)
+        setTimeout(() => {
+          this.initChart()
+        }, 1000)
+      })
     }
   }
 }

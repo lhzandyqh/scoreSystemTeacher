@@ -10,11 +10,19 @@
 
 <script>
 import echarts from 'echarts'
+import { getSubjectCompareFrontNData } from '@/api/nianjizhurenGetData'
 require('echarts/theme/macarons')
 export default {
   name: 'SubjectFrontNRankChart',
+  props: {
+    subject: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
+      id: window.localStorage.getItem('id'),
       option: {
         tooltip: {
           trigger: 'axis',
@@ -46,10 +54,10 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [320, 302, 301, 334, 390, 330, 320]
+            data: []
           },
           {
             name: '前200名',
@@ -58,10 +66,10 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: []
           },
           {
             name: '前300名',
@@ -70,10 +78,10 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [220, 182, 191, 234, 290, 330, 310]
+            data: []
           },
           {
             name: '前400名',
@@ -82,10 +90,10 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [150, 212, 201, 154, 190, 330, 410]
+            data: []
           },
           {
             name: '前500名',
@@ -94,22 +102,56 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [820, 832, 901, 934, 1290, 1330, 1320]
+            data: []
           }
         ]
       }
     }
   },
   mounted() {
-    this.initChart()
+    this.firstGetChartData()
+    setTimeout(() => {
+      this.initChart()
+    }, 2000)
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('sixComparisonchart'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    firstGetChartData: function() {
+      const prams = {
+        userID: this.id,
+        subjectname: this.subject
+      }
+      getSubjectCompareFrontNData(prams).then(response => {
+        console.log('班主任科目对比图测试是否拿到前N数据')
+        console.log(response.data)
+        const classArray = []
+        console.log('看一下能不能排序')
+        console.log(response.data.info.sort(this.compare('classid')))
+        for (var i = 0; i < response.data.info.length; i++) {
+          classArray.push(response.data.info[i].classid)
+          this.option.series[0].data.push(response.data.info[i].oneHunderdnum)
+          this.option.series[1].data.push(response.data.info[i].twoHundrednum)
+          this.option.series[2].data.push(response.data.info[i].threeHundernum)
+          this.option.series[3].data.push(response.data.info[i].fourHundernum)
+          this.option.series[4].data.push(response.data.info[i].othernum)
+        }
+        console.log('检查输出的班级列表')
+        console.log(classArray)
+        this.option.yAxis.data = classArray
+      })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value2 - value1
+      }
     }
   }
 }

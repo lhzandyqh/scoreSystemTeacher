@@ -23,7 +23,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-six-rates-comparison-chart />
+              <subject-six-rates-comparison-chart :subject="subject" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="地理单科前N名上线分布对比" name="second">
@@ -46,7 +46,7 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <subject-front-n-rank-chart />
+              <subject-front-n-rank-chart :subject="subject" />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -60,48 +60,79 @@ import subjectClassSixRatesCom from '@/views/teacherGradeReport/subjectCompare/t
 import subjectSixRatesComparisonChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectSixRatesComparisonChart'
 import subjectFrontNRank from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRank'
 import subjectFrontNRankChart from '@/views/teacherGradeReport/subjectCompare/tableAndChart/subjectFrontNRankChart'
+import { getSubjectCompareSixRatesData, getSubjectCompareFrontNData } from '@/api/nianjizhurenGetData'
 export default {
   name: 'DiliCompare',
   components: { subjectClassSixRatesCom, subjectSixRatesComparisonChart, subjectFrontNRank, subjectFrontNRankChart },
   data() {
     return {
+      id: window.localStorage.getItem('id'),
+      subject: '地理',
       inTermSixRatesData: [],
       frontData: [],
       activeName: 'first',
       tableInfo: [
-        { prop: 'id', lable: '年级' },
-        { prop: 'id', lable: '科目' },
-        { prop: 'studentMachineCard', lable: '班级' },
-        { prop: 'studentName', lable: '高分人数' },
-        { prop: 'classId', lable: '高分率' },
-        { prop: 'coversionTotal', lable: '高分率排名' },
-        { prop: 'classIndex', lable: '优秀人数' },
-        { prop: 'classIndex', lable: '优秀率' },
-        { prop: 'advancefall', lable: '优秀率排名' },
-        { prop: 'yuwenScore', lable: '良好人数' },
-        { prop: 'shuxueScore', lable: '良好率' },
-        { prop: 'yingyuScore', lable: '良好率排名' },
-        { prop: 'threeScore', lable: '及格人数' },
-        { prop: 'physics', lable: '及格率' },
-        { prop: 'huaxueCoversion', lable: '及格率排名' },
-        { prop: 'shengwuCoversion', lable: '低分人数' },
-        { prop: 'lishiCoversion', lable: '低分率' },
-        { prop: 'diliCoversion', lable: '低分率排名' },
-        { prop: 'lishiCoversion', lable: '超均人数' },
-        { prop: 'diliCoversion', lable: '超均率' },
-        { prop: 'zhengzhiCoversion', lable: '超均率排名' }
+        { prop: 'gradename', lable: '年级' },
+        { prop: 'classid', lable: '班级' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        // { prop: 'coversionTotal', lable: '高分率排名' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        // { prop: 'advancefall', lable: '优秀率排名' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        // { prop: 'yingyuScore', lable: '良好率排名' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        // { prop: 'huaxueCoversion', lable: '及格率排名' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        // { prop: 'diliCoversion', lable: '低分率排名' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ],
       tableInfoTwo: [
-        { prop: 'physics', lable: '年级' },
-        { prop: 'id', lable: '科目' },
-        { prop: 'huaxueCoversion', lable: '班级' },
-        { prop: 'shengwuCoversion', lable: '校前100名人数' },
-        { prop: 'lishiCoversion', lable: '前100名排名' },
-        { prop: 'diliCoversion', lable: '校前200名人数' },
-        { prop: 'lishiCoversion', lable: '前200名排名' },
-        { prop: 'diliCoversion', lable: '校前300名人数' },
-        { prop: 'zhengzhiCoversion', lable: '校前300名排名人数' }
+        { prop: 'gradename', lable: '年级' },
+        { prop: 'classid', lable: '班级/行政班' },
+        { prop: 'oneHunderdnum', lable: '校前100名人数' },
+        // { prop: 'yibairank', lable: '前100名排名' },
+        { prop: 'twoHundrednum', lable: '校前100-200名人数' },
+        // { prop: 'liangbairank', lable: '前100-200名排名' },
+        { prop: 'threeHundernum', lable: '校前200-300名人数' },
+        // { prop: 'sanbairank', lable: '校前200-300名排名人数排名' },
+        { prop: 'fourHundernum', lable: '校前300-400人数' },
+        // { prop: 'sanbairank', lable: '校前300-400名排名人数' },
+        { prop: 'othernum', lable: '校400名后人数数' }
       ]
+    }
+  },
+  mounted() {
+    this.getSixRatesData()
+  },
+  methods: {
+    getSixRatesData: function() {
+      const prams = {
+        userID: this.id,
+        subjectname: this.subject
+      }
+      getSubjectCompareSixRatesData(prams).then(response => {
+        console.log('年级主任科目对比测试是否拿到六率数据')
+        console.log(response.data)
+        this.inTermSixRatesData = response.data.info.sort(this.compare('classid'))
+      })
+      getSubjectCompareFrontNData(prams).then(response => {
+        console.log('年级主任科目对比测试是否拿到前N名数据')
+        console.log(response.data)
+        this.frontData = response.data.info.sort(this.compare('classid'))
+      })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value1 - value2
+      }
     }
   }
 }

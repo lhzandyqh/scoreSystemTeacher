@@ -54,7 +54,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -66,7 +66,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -78,7 +78,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -90,7 +90,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -102,7 +102,7 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
             data: []
@@ -131,6 +131,8 @@ export default {
         console.log('班主任科目对比图测试是否拿到前N数据')
         console.log(response.data)
         const classArray = []
+        console.log('看一下能不能排序')
+        console.log(response.data.info.sort(this.compare('classid')))
         for (var i = 0; i < response.data.info.length; i++) {
           classArray.push(response.data.info[i].classid)
           this.option.series[0].data.push(response.data.info[i].oneHunderdnum)
@@ -143,6 +145,13 @@ export default {
         console.log(classArray)
         this.option.yAxis.data = classArray
       })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value2 - value1
+      }
     }
   }
 }

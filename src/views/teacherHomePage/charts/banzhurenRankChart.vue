@@ -7,7 +7,7 @@
         </div>
       </el-col>
       <el-col :span="4">
-        <el-select v-model="value" placeholder="请选择科目" @change="changeLocationValue">
+        <el-select v-model="value" placeholder="请选择科目" class="select" @change="changeLocationValue">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -334,6 +334,14 @@ export default {
   }
   .table_container{
     padding-top: 40px;
+  }
+  .select >>>.el-input__inner{
+    border: 1px solid #dcdfe6;
+  }
+  .card{
+    width: 100%;
+    margin-left: -20%;
+    margin-right: 20%;
   }
 
 </style>

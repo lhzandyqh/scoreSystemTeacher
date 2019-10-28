@@ -1,7 +1,6 @@
 <template>
   <div class="tablecontainer">
     <el-table
-      v-loading="loading"
       :data="inTermSixRatesData"
       align="center"
       border
@@ -37,9 +36,9 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.controlLoading()
-    }, 2000)
+    // setTimeout(() => {
+    //   this.controlLoading()
+    // }, 2000)
   },
   methods: {
     controlLoading: function() {

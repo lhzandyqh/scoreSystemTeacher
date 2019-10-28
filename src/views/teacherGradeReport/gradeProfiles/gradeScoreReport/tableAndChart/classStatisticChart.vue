@@ -4,6 +4,20 @@
       <span style="font-size: 20px;font-weight: bolder">分档统计图</span>
     </el-row>
     <el-row style="padding-top: 20px">
+      <el-col>
+        <el-col :span="4">
+          <el-select v-model="value" placeholder="请选择不同的分数区间" @change="changeLocationValue">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-col>
+      </el-col>
+    </el-row>
+    <el-row style="padding-top: 20px">
       <div id="class" style="width:100%;height: 400px" />
     </el-row>
   </div>
@@ -16,6 +30,18 @@ export default {
   name: 'ClassStatisticChart',
   data() {
     return {
+      options: [
+        {
+          value: '艺十',
+          label: '10分'
+        }, {
+          value: '二十',
+          label: '20分'
+        }, {
+          value: '三十',
+          label: '30分'
+        }
+      ],
       option: {
         tooltip: {
           trigger: 'item'

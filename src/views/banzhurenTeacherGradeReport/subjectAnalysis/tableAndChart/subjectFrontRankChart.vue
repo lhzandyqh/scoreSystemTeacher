@@ -6,95 +6,97 @@
         <div id="frontrank" style="width:500px;height: 400px" />
       </el-col>
       <el-col :span="12">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span style="font-weight: bolder">前100名学生名单</span>
-            <el-button style="float: right; padding: 3px 0" type="text">上一页</el-button>
-            <el-button style="float: right; padding: 3px 0" type="text">下一页</el-button>
+        <el-row>
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span style="font-weight: bolder">前100名学生名单</span>
+              <el-button style="float: right; padding: 3px 0" type="text">上一页</el-button>
+              <el-button style="float: right; padding: 3px 0" type="text">下一页</el-button>
+            </div>
+            <div>
+              <!--            <span style="font-size: 14px">孙金鑫</span><br>-->
+              <!--            <span style="font-size: 14px">邓庆东</span>-->
+              <el-row :gutter="20">
+                <el-col :span="4">
+                  <span style="font-size: 14px">齐俊超</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">吴思琪</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">段红瑞</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">陈科</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">孙金鑫</span>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20" style="padding-top: 20px">
+                <el-col :span="4">
+                  <span style="font-size: 14px">杜明</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">刘静怡</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">高紫燕</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">赵明凯</span>
+                </el-col>
+                <el-col :span="4">
+                  <span style="font-size: 14px">陈瑞芬</span>
+                </el-col>
+              </el-row>
+            </div>
+          </el-card>
+        </el-row>
+        <el-row>
+          <div class="table">
+            <el-table
+              :data="tableData"
+              border
+              style="width: 100%"
+            >
+              <el-table-column
+                prop="class"
+                align="center"
+                label="班级/行政班"
+                width="150"
+              />
+              <el-table-column
+                prop="frontone"
+                align="center"
+                label="校前100名人数"
+                width="160"
+              />
+              <el-table-column
+                prop="fronttwo"
+                align="center"
+                label="校100-200名人数"
+                width="160"
+              />
+              <el-table-column
+                prop="frontthree"
+                align="center"
+                label="校200-300名人数"
+              />
+              <el-table-column
+                prop="frontthree"
+                align="center"
+                label="校300-400名人数"
+              />
+              <el-table-column
+                prop="frontthree"
+                align="center"
+                label="校400名之后人数"
+              />
+            </el-table>
           </div>
-          <div>
-            <!--            <span style="font-size: 14px">孙金鑫</span><br>-->
-            <!--            <span style="font-size: 14px">邓庆东</span>-->
-            <el-row :gutter="20">
-              <el-col :span="4">
-                <span style="font-size: 14px">齐俊超</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">吴思琪</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">段红瑞</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">陈科</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">孙金鑫</span>
-              </el-col>
-            </el-row>
-            <el-row :gutter="20" style="padding-top: 20px">
-              <el-col :span="4">
-                <span style="font-size: 14px">杜明</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">刘静怡</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">高紫燕</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">赵明凯</span>
-              </el-col>
-              <el-col :span="4">
-                <span style="font-size: 14px">陈瑞芬</span>
-              </el-col>
-            </el-row>
-          </div>
-        </el-card>
+        </el-row>
       </el-col>
-    </el-row>
-    <el-row>
-      <div class="table">
-        <el-table
-          :data="tableData"
-          border
-          style="width: 70%"
-        >
-          <el-table-column
-            prop="class"
-            align="center"
-            label="班级/行政班"
-            width="150"
-          />
-          <el-table-column
-            prop="frontone"
-            align="center"
-            label="校前100名人数"
-            width="160"
-          />
-          <el-table-column
-            prop="fronttwo"
-            align="center"
-            label="校100-200名人数"
-            width="160"
-          />
-          <el-table-column
-            prop="frontthree"
-            align="center"
-            label="校200-300名人数"
-          />
-          <el-table-column
-            prop="frontthree"
-            align="center"
-            label="校300-400名人数"
-          />
-          <el-table-column
-            prop="frontthree"
-            align="center"
-            label="校400名之后人数"
-          />
-        </el-table>
-      </div>
     </el-row>
   </div>
 </template>
@@ -196,7 +198,7 @@ export default {
     margin-left: 40px;
   }
   .table{
-    margin-left: 20%;
+    /*margin-left: 20%;*/
     margin-top: 20px;
   }
 

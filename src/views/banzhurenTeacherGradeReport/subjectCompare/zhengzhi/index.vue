@@ -121,13 +121,20 @@ export default {
       getSubjectCompareSixRatesData(prams).then(response => {
         console.log('班主任科目对比测试是否拿到六率数据')
         console.log(response.data)
-        this.inTermSixRatesData = response.data.info
+        this.inTermSixRatesData = response.data.info.sort(this.compare('classid'))
       })
       getSubjectCompareFrontNData(prams).then(response => {
         console.log('班主任科目对比测试是否拿到前N名数据')
         console.log(response.data)
-        this.frontData = response.data.info
+        this.frontData = response.data.info.sort(this.compare('classid'))
       })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value1 - value2
+      }
     }
   }
 }

@@ -84,11 +84,15 @@
 </template>
 
 <script>
-import { getSubjectFrontFiveData, getSubjectBehindFiveData } from '@/api/subjectAnalysisData'
+import { getSubjectAnalysisClassFrontFiveData, getSubjectAnalysisClassBehindFiveData } from '@/api/nianjizhurenGetData'
 export default {
   name: 'SubjectImportantFocusOnTable',
   props: {
-    classValue: {
+    subject: {
+      type: String,
+      required: true
+    },
+    classname: {
       type: String,
       required: true
     }
@@ -128,11 +132,12 @@ export default {
     getFrontFiveData: function() {
       const prams = {
         userID: this.id,
-        classname: this.classValue
+        classname: this.classname,
+        subjectname: this.subject
       }
       console.log('前五，现在的班级是' + prams.classname)
-      getSubjectFrontFiveData(prams).then(response => {
-        console.log('测试重点关注前五')
+      getSubjectAnalysisClassFrontFiveData(prams).then(response => {
+        console.log('年级主任测试重点关注前五')
         console.log(response.data)
         this.frontFive = response.data.info
       })
@@ -140,11 +145,12 @@ export default {
     getBehindFiveData: function() {
       const prams = {
         userID: this.id,
-        classname: this.classValue
+        classname: this.classname,
+        subjectname: this.subject
       }
       console.log('后五，现在的班级是' + prams.classname)
-      getSubjectBehindFiveData(prams).then(response => {
-        console.log('测试重点关注后五')
+      getSubjectAnalysisClassBehindFiveData(prams).then(response => {
+        console.log('年级主任测试重点关注后五')
         console.log(response.data)
         this.behindFive = response.data.info
       })
