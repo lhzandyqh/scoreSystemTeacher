@@ -48,7 +48,9 @@ export default {
     }
   },
   mounted() {
-    this.getData()
+    setTimeout(() => {
+      this.getData()
+    }, 1000)
   },
   methods: {
     initChart: function() {

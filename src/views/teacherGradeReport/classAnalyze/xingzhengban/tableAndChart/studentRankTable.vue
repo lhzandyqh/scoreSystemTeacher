@@ -2,86 +2,74 @@
   <div class="app-container">
     <el-table
       :data="tableData"
-      height="300"
       style="width: 100%"
     >
       <el-table-column
-        prop="kemu"
+        prop="subject"
         label="科目"
         align="center"
-        width="80"
       />
       <el-table-column
-        prop="renshu"
+        prop="numsOfClass"
         align="center"
         label="班级人数"
-        width="80"
       />
       <el-table-column align="center" label="高分【90%~100%】">
         <el-table-column
-          prop="gaofen"
+          prop="highScoreNums"
           align="center"
           label="高分人数"
-          width="100"
         />
         <el-table-column
-          prop="gaofenlv"
+          prop="highScoreRate"
           align="center"
           label="高分率"
-          width="100"
         />
       </el-table-column>
       <el-table-column align="center" label="优秀【85%~90%】">
         <el-table-column
-          prop="youxiu"
+          prop="goodScoreNums"
           align="center"
           label="优秀人数"
-          width="100"
         />
         <el-table-column
-          prop="youxiulv"
+          prop="goodScoreRate"
           align="center"
           label="优秀率"
-          width="100"
         />
       </el-table-column>
       <el-table-column align="center" label="良好【75%~85%】">
         <el-table-column
-          prop="lianghao"
+          prop="fineScorNums"
           align="center"
           label="良好人数"
-          width="100"
         />
         <el-table-column
-          prop="lianghaolv"
+          prop="fineScoreRate"
           align="center"
           label="良好率"
-          width="100"
         />
       </el-table-column>
       <el-table-column align="center" label="及格【60%~75%】">
         <el-table-column
-          prop="jige"
+          prop="passScoreNums"
           align="center"
           label="及格人数"
-          width="100"
         />
         <el-table-column
           align="center"
-          prop="jigelv"
+          prop="passScoreRate"
           label="及格率"
-          width="100"
         />
       </el-table-column>
       <el-table-column align="center" label="低分【0%~60%】">
         <el-table-column
-          prop="difen"
+          prop="lowScoreNums"
           align="center"
           label="低分人数"
-          width="120"
         />
         <el-table-column
-          prop="difenlv"
+          prop="lowScoreRate"
           align="center"
           label="低分率"
         />
@@ -91,65 +79,37 @@
 </template>
 
 <script>
+import { getRankChartDataBySubjectAndClass } from '@/api/nianjizhurenGetData'
 export default {
   name: 'StudentRankTable',
+  props: {
+    // subject: {
+    //   type: String,
+    //   required: true
+    // },
+    classname: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      tableData: [
-        {
-          kemu: '语文',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        }, {
-          kemu: '语文',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        }, {
-          kemu: '语文',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        }, {
-          kemu: '语文',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        }
-      ]
+      tableData: []
+    }
+  },
+  mounted() {
+    this.firstInitTabletByData()
+  },
+  methods: {
+    firstInitTabletByData: function() {
+      const prams = {
+        subjectname: '全科',
+        classname: this.classname
+      }
+      this.tableData = []
+      getRankChartDataBySubjectAndClass(prams).then(response => {
+        this.tableData.push(response.data)
+      })
     }
   }
 }

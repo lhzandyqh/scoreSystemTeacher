@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row style="padding-top: 20px">
-      <div id="sub" style="width:1200px;height: 400px;margin-left: 11%" />
+      <div id="sub" style="width:1200px;height: 400px;" />
     </el-row>
   </div>
 </template>

@@ -46,19 +46,19 @@
     </el-row>
     <el-row style="padding-top: 20px">
       <div class="title">
-        <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩年级六率表-</span>
-      </div>
-    </el-row>
-    <el-row style="padding-top: 20px">
-      <in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoTwo" />
-    </el-row>
-    <el-row style="padding-top: 20px">
-      <div class="title">
         <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩年级六率对比图-</span>
       </div>
     </el-row>
     <el-row style="padding-top: 20px">
       <in-term-six-rates-chart />
+    </el-row>
+    <el-row style="padding-top: 20px">
+      <div class="title">
+        <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩年级六率表-</span>
+      </div>
+    </el-row>
+    <el-row style="padding-top: 20px">
+      <in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoTwo" />
     </el-row>
   </div>
 </template>

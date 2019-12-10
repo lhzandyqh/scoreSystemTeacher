@@ -11,19 +11,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—语文科目六率对比表—</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—班级六率对比图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-six-rates-comparison-chart :subject="subject" />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—语文科目六率对比表—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="语文单科前N名上线分布对比" name="second">
@@ -34,19 +34,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—语文单科前N名上线分布表—</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—语文单科前N名上线分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-front-n-rank-chart :subject="subject" />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—语文单科前N名上线分布表—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -72,7 +72,7 @@ export default {
       frontData: [],
       activeName: 'first',
       tableInfo: [
-        { prop: 'gradename', lable: '年级' },
+        // { prop: 'gradename', lable: '年级' },
         { prop: 'classid', lable: '班级' },
         { prop: 'highnum', lable: '高分人数' },
         { prop: 'highnumradio', lable: '高分率' },
@@ -93,7 +93,7 @@ export default {
         { prop: 'beyondradio', lable: '超均率' }
       ],
       tableInfoTwo: [
-        { prop: 'gradename', lable: '年级' },
+        // { prop: 'gradename', lable: '年级' },
         { prop: 'classid', lable: '班级/行政班' },
         { prop: 'oneHunderdnum', lable: '校前100名人数' },
         // { prop: 'yibairank', lable: '前100名排名' },

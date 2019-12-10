@@ -161,3 +161,165 @@ export function getSubjectCompareFrontNData(parems) {
     params: parems
   })
 }
+
+// 班级分析 行政班 重点关注前5名
+export function getClassAnalysisXingzhengFrontFiveData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/AdminClassTopFiveScore',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 重点关注后5名
+export function getClassAnalysisXingzhengBehindFiveData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/AdminClassLastFiveScore',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 全校前N名分布
+export function getClassAnalysisXingzhengFrontNData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/getAdminTopNDis',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 班校对比 班级六率分析
+export function getClassAnalysisXingzhengSixRatesData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachAdminClassSchoolCompare',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 历次对比 年级均分
+export function getClassAnalysisXingzhengGradeAverageData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachAdminSubjectAllAvgAndDiv',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 历次对比 年级六率
+export function getClassAnalysisXingzhengGradeSixRatesData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachAdminSubjectAllSixRadio',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 根据学科获得班级
+export function getClassAnalysisJiaoxueGetClassDataBySubject(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachSubjectAllclass',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 教学班 单科成绩单
+export function getClassAnalysisJiaoxueSingleSubjectData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/getTeachClassSubjectScoreList',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级分析 教学班 重点关注前5名
+export function getClassAnalysisJiaoxueFrontFiveData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/TeachClassTopFiveScore',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 教学班 重点关注后5名
+export function getClassAnalysisJiaoxueBehindFiveData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/TeachClassLastFiveScore',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 教学班 前N名
+export function getClassAnalysisJiaoxueFrontNData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/getTeachTopNDis',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级分析 教学班 班校对比 班级六率分析
+export function getClassAnalysisJiaoxueSixRatesData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachTeachClassSchoolCompare',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 历次对比 年级均分
+export function getClassAnalysisJiaoxueGradeAverageData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachTeachSubjectAllAvgAndDiv',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级分析 行政班 历次对比 年级六率
+export function getClassAnalysisJiaoxueGradeSixRatesData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassAnalysis/teachTeachSubjectAllSixRadio',
+    method: 'post',
+    params: parems
+  })
+}
+
+// 班级对比 行政班 班级六率对比
+export function getClassCompareXingzhengSixRateaData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassCompare/teachAdminClassTotalSubjectContrast',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级对比 行政班 前N名分布
+export function getClassCompareXingzhengFrontNData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassCompare/teachAdminSubjectTopNDistriute',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级对比 教学班 班级六率对比
+export function getClassCompareJiaoxueSixRateaData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassCompare/teachTeachClassTotalSubjectContrast',
+    method: 'get',
+    params: parems
+  })
+}
+
+// 班级对比 教学班 前N名分布
+export function getClassCompareJiaoxueFrontNData(parems) {
+  return request({
+    url: '/api/GradeDirectorClassCompare/teachSubjectTopNDistriute',
+    method: 'get',
+    params: parems
+  })
+}

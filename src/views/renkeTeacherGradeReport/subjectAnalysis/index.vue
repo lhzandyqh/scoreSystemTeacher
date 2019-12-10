@@ -53,9 +53,6 @@
               <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—全校前N名分布—</span>
               </div>
-              <div class="title" style="padding-top: 10px">
-                <span style="font-size: 18px;">班级：共70人   全校：共500人</span>
-              </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-front-rank-chart />
@@ -67,14 +64,6 @@
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
               </div>
             </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—科目六率分析—</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-class-six-rates-ana :all-grade-six-rates-data="allGradeSixRatesData" :table-header="tableInfoTwo" />
-            </el-row>
             <el-row style="padding-top: 40px">
               <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—科目六率科校对比图—</span>
@@ -82,6 +71,14 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-six-rate-class-chart :all-grade-six-rates-data="allGradeSixRatesData" />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—科目六率分析—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-class-six-rates-ana :all-grade-six-rates-data="allGradeSixRatesData" :table-header="tableInfoTwo" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="等级分布" name="fourth">
@@ -137,19 +134,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率表-</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoFour" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
                 <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率对比图-</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-six-rate-chart ref="mysix" :class-value="classValue" />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率表-</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoFour" />
             </el-row>
           </el-tab-pane>
         </el-tabs>

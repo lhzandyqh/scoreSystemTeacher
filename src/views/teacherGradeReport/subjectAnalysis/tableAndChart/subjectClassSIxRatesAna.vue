@@ -1,7 +1,8 @@
 <template>
   <div class="tablecontainer">
-    <span style="font-size: 12px;">高分率：90%-100% 优秀率：90%-100% 良好率：90%-100% 及格率：90%-100% 低分率：90%-100% 超均率：超过平均分比率</span>
+    <!--    <span style="font-size: 12px;">高分率：90%-100% 优秀率：90%-100% 良好率：90%-100% 及格率：90%-100% 低分率：90%-100% 超均率：超过平均分比率</span>-->
     <el-table
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :data="allGradeSixRatesData"
       align="center"
       border

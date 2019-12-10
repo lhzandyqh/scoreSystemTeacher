@@ -44,10 +44,10 @@ export default {
     }
   },
   mounted() {
-    this.getData()
+    // this.getData()
     setTimeout(() => {
-      this.initChart()
-    }, 1000)
+      this.getData()
+    }, 2000)
   },
   methods: {
     initChart: function() {
@@ -71,8 +71,11 @@ export default {
             type: 'bar'
           })
         }
-        console.log('检查数据')
+        console.log('均分表检查数据')
         console.log(this.option.dataset.source[0])
+        setTimeout(() => {
+          this.initChart()
+        }, 1000)
       })
     }
   }

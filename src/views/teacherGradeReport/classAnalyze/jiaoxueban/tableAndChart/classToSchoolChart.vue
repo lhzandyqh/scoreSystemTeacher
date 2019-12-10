@@ -8,11 +8,23 @@
 
 <script>
 import echarts from 'echarts'
+import { getClassAnalysisJiaoxueSixRatesData } from '@/api/nianjizhurenGetData'
 require('echarts/theme/macarons')
 export default {
   name: 'ClassToSchoolChart',
+  props: {
+    subject: {
+      type: String,
+      required: true
+    },
+    classname: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
+      id: window.localStorage.getItem('id'),
       option: {
         tooltip: {
           trigger: 'axis',
@@ -48,8 +60,8 @@ export default {
             type: 'value',
             name: '比率',
             min: 0,
-            max: 100,
-            interval: 10,
+            max: 1,
+            interval: 0.1,
             axisLabel: {
               formatter: '{value} '
             }
@@ -71,12 +83,41 @@ export default {
     }
   },
   mounted() {
-    this.initChart()
+    setTimeout(() => {
+      this.getChartData()
+    }, 1000)
+    // this.getChartData()
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('classtoschool'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    getChartData: function() {
+      const prams = {
+        userID: this.id,
+        subjectname: this.subject,
+        classname: this.classname
+      }
+      getClassAnalysisJiaoxueSixRatesData(prams).then(response => {
+        console.log('年级组长测试教学班科校对比')
+        console.log(response.data)
+        this.option.series[0].data[0] = response.data.info[1].highnumradio
+        this.option.series[0].data[1] = response.data.info[1].excellentratio
+        this.option.series[0].data[2] = response.data.info[1].goodratio
+        this.option.series[0].data[3] = response.data.info[1].passratio
+        this.option.series[0].data[4] = response.data.info[1].failratio
+        this.option.series[0].data[5] = response.data.info[1].beyondradio
+        this.option.series[1].data[0] = response.data.info[0].highnumradio
+        this.option.series[1].data[1] = response.data.info[0].excellentratio
+        this.option.series[1].data[2] = response.data.info[0].goodratio
+        this.option.series[1].data[3] = response.data.info[0].passratio
+        this.option.series[1].data[4] = response.data.info[0].failratio
+        this.option.series[1].data[5] = response.data.info[0].beyondradio
+        setTimeout(() => {
+          this.initChart()
+        }, 1000)
+      })
     }
   }
 }

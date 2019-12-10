@@ -28,8 +28,8 @@ export default {
       id: window.localStorage.getItem('id'),
       tableInfo: [
         { prop: 'subjectname', lable: '学科' },
-        { prop: 'leibie', lable: '类别' },
-        { prop: 'renshu', lable: '人数' },
+        // { prop: 'leibie', lable: '类别' },
+        // { prop: 'renshu', lable: '人数' },
         { prop: 'scoreAvg', lable: '平均分' },
         { prop: 'StandardDiviation', lable: '标准差' },
         { prop: 'highnum', lable: '高分人数' },

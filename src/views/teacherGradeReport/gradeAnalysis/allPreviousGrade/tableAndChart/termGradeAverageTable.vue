@@ -5,7 +5,6 @@
       :data="termAverageData"
       align="center"
       border
-      height="250"
       style="width: 100%;margin-top:10px;"
     >
       <el-table-column

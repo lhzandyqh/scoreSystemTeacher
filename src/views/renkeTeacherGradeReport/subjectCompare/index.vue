@@ -11,19 +11,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—科目六率对比表—</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—班级六率对比图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-six-rates-comparison-chart />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—科目六率对比表—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-class-six-rates-com :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfo" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="单科前N名上线分布对比" name="second">
@@ -34,19 +34,19 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—物理单科前N名上线分布表—</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <subject-front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—物理单科前N名上线分布图—</span>
+                <span style="font-size: 25px;color: #2ac06d">—单科前N名上线分布图—</span>
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
               <subject-front-n-rank-chart />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—单科前N名上线分布表—</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <subject-front-n-rank :front-data="frontData" :table-header="tableInfoTwo" />
             </el-row>
           </el-tab-pane>
         </el-tabs>

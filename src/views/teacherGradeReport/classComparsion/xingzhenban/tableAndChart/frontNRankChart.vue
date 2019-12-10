@@ -10,11 +10,13 @@
 
 <script>
 import echarts from 'echarts'
+import { getClassCompareXingzhengFrontNData } from '@/api/nianjizhurenGetData'
 require('echarts/theme/macarons')
 export default {
   name: 'FrontNRankChart',
   data() {
     return {
+      id: window.localStorage.getItem('id'),
       option: {
         tooltip: {
           trigger: 'axis',
@@ -23,7 +25,7 @@ export default {
           }
         },
         legend: {
-          data: ['前100名', '前200名', '前300名', '前400名', '前500名']
+          data: ['前100名', '前100-200名', '前200-300名', '前300-400名', '400名后']
         },
         grid: {
           left: '3%',
@@ -46,70 +48,103 @@ export default {
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [320, 302, 301, 334, 390, 330, 320]
+            data: []
           },
           {
-            name: '前200名',
+            name: '前100-200名',
             type: 'bar',
             stack: '总量',
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: []
           },
           {
-            name: '前300名',
+            name: '前200-300名',
             type: 'bar',
             stack: '总量',
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [220, 182, 191, 234, 290, 330, 310]
+            data: []
           },
           {
-            name: '前400名',
+            name: '前300-400名',
             type: 'bar',
             stack: '总量',
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [150, 212, 201, 154, 190, 330, 410]
+            data: []
           },
           {
-            name: '前500名',
+            name: '400名后',
             type: 'bar',
             stack: '总量',
             label: {
               normal: {
                 show: true,
-                position: 'insideRight'
+                position: 'insideLeft'
               }
             },
-            data: [820, 832, 901, 934, 1290, 1330, 1320]
+            data: []
           }
         ]
       }
     }
   },
   mounted() {
-    this.initChart()
+    this.firstGetChartData()
+    setTimeout(() => {
+      this.initChart()
+    }, 2000)
   },
   methods: {
     initChart: function() {
       this.chart = echarts.init(document.getElementById('sixComparisonchart'), 'macarons')
       this.chart.setOption(this.option)
+    },
+    firstGetChartData: function() {
+      const prams = {
+        userID: this.id
+      }
+      getClassCompareXingzhengFrontNData(prams).then(response => {
+        console.log('年级主任行政班班级对比图测试是否拿到六率数据')
+        console.log(response.data)
+        const classArray = []
+        console.log('看一下能不能排序')
+        console.log(response.data.info.sort(this.compare('classid')))
+        for (var i = 0; i < response.data.info.length; i++) {
+          classArray.push(response.data.info[i].classid)
+          this.option.series[0].data.push(response.data.info[i].oneHunderdnum)
+          this.option.series[1].data.push(response.data.info[i].twoHundrednum)
+          this.option.series[2].data.push(response.data.info[i].threeHundernum)
+          this.option.series[3].data.push(response.data.info[i].fourHundernum)
+          this.option.series[4].data.push(response.data.info[i].othernum)
+        }
+        console.log('检查输出的班级列表')
+        console.log(classArray)
+        this.option.yAxis.data = classArray
+      })
+    },
+    compare: function(property) {
+      return function(a, b) {
+        var value1 = a[property]
+        var value2 = b[property]
+        return value2 - value1
+      }
     }
   }
 }

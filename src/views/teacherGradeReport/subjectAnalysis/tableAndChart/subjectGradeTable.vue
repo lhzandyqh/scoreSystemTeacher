@@ -1,6 +1,7 @@
 <template>
   <div class="tablecontainer">
     <el-table
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :data="allGradeTableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       align="center"
       border

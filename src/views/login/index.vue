@@ -5,9 +5,14 @@
       <!--      <img src="../../assets/jpg/logofinal.png" style="width: 10%;height: 18%;" class="login-logo" alt>-->
       <!--      <img src="../../assets/jpg/zhongke.png" style="width: 10%;height: 18%;padding-left: 7%" class="login-logo" alt>-->
       <!--      <img src="../../assets/jpg/login_b_t.jpg" class="login-bg" alt>-->
-      <!--      <img :src="require('./img/logofinal.png')" style="width: 10%;height: 18%;" class="login-logo" alt>-->
-      <!--      <img :src="require('./img/zhongke.png')" style="width: 20%;height: 18%;padding-left: 7%" class="login-logo" alt>-->
+      <img :src="require('./img/logofinal.png')" style="width: 8%;height: 18%;" class="login-logo" alt>
+      <img :src="require('./img/zhongke.png')" style="width: 18%;height: 18%;padding-left: 7%" class="login-logo" alt>
       <img :src="require('./img/login_b_t.jpg')" class="login-bg" alt>
+      <div class="login-ti" alt>
+        <el-button type="text">使用说明</el-button>
+        <!--        <span class="tel-2">联系我们</span>-->
+        <!--        <img class="tel-1" :src="require('./img/erwei.jpg')" width="80" height="80">-->
+      </div>
       <div class="login-input" style="opacity: .9;">
         <div class="loginTitle">用户登录</div>
         <div class="login-center">
@@ -27,6 +32,12 @@
         </div>
         <div class="forget">忘记密码？</div>
         <el-button type="primary" class="subBtn" @click="handleLogin">登录</el-button>
+        <div style="text-align: center">
+          <!--          <el-button type="text">使用说明</el-button>-->
+        </div>
+      </div>
+      <div class="copyrightContainer">
+        <span style="font-size: 12px">Copyright&nbsp;&nbsp;&nbsp;中科智禾教育大数据中心   ©2019</span>
       </div>
     </div>
   </div>
@@ -164,9 +175,16 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 550px;
+    width: 500px;
     height: 100px;
-    margin: 20px;
+  }
+  .login-ti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100px;
+    margin-left: 90%;
+    margin-top: 30px;
   }
   .Password {
     position: absolute;
@@ -178,11 +196,12 @@ export default {
   }
   body {
     margin: 0;
+    background-color: #e0ecf8;
   }
   .login-all {
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 600px;
   }
   .login-center {
     text-align: center;
@@ -199,7 +218,7 @@ export default {
     height: 360px;
     background: #e1edf8;
     border-radius: 10px;
-    bottom: 100px;
+    bottom: 30px;
     right: 150px;
   }
   .input_ {
@@ -216,6 +235,16 @@ export default {
     border-top: 1px solid #ccc!important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+  .copyrightContainer{
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #app{
+    /*position: fixed;*/
+    background-color:#e0ecf8;
+    margin-bottom: 0;
   }
 </style>
 

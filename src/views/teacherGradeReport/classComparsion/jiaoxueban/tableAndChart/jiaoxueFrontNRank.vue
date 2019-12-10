@@ -1,6 +1,7 @@
 <template>
   <div class="tablecontainer">
     <el-table
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :data="frontData"
       align="center"
       border

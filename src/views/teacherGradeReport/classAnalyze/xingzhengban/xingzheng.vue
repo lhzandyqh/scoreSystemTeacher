@@ -6,7 +6,7 @@
           <span style="font-weight: bolder">请选择班级</span>
         </div>
         <div class="select">
-          <el-select v-model="value" placeholder="请选择" @change="getScoreTableData">
+          <el-select v-model="value" placeholder="请选择" @change="changeData">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -26,14 +26,6 @@
                 <span style="font-size: 25px;font-weight: bolder">2018-2019学年第一学期七年级期中考试</span>
               </div>
             </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
-                <span style="font-size: 25px;color: #2ac06d">—班级成绩单—</span>
-              </div>
-            </el-row>
-            <el-row>
-              <class-grade-table :all-grade-table-data="allGradeTableData" :table-header="tableInfo" />
-            </el-row>
             <el-row style="padding-top: 40px">
               <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—一分一档统计图—</span>
@@ -41,6 +33,14 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <one-score-chart />
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 25px;color: #2ac06d">—班级成绩单—</span>
+              </div>
+            </el-row>
+            <el-row>
+              <class-grade-table :all-grade-table-data="allGradeTableData" :table-header="tableInfo" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="重点关注" name="second">
@@ -55,18 +55,15 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <important-focus-table />
+              <important-focus-table ref="important" :classname="value" />
             </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 25px;color: #2ac06d">—全校前N名分布—</span>
               </div>
-              <div class="title" style="padding-top: 10px">
-                <span style="font-size: 18px;">班级：共70人   全校：共500人</span>
-              </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <front-rank-chart />
+              <front-rank-chart ref="frontn" :classname="value" />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="班校对比" name="third">
@@ -124,11 +121,11 @@
               </div>
             </el-row>
             <el-row style="padding-top: 20px">
-              <students-rank-chart />
+              <students-rank-chart ref="student" :classname="value" />
             </el-row>
-            <el-row style="padding-top: 20px">
-              <student-rank-table />
-            </el-row>
+            <!--            <el-row style="padding-top: 20px">-->
+            <!--              <student-rank-table ref="studenttable" :classname="value" />-->
+            <!--            </el-row>-->
           </el-tab-pane>
           <el-tab-pane label="历次对比" name="fourth1">
             <el-row style="padding-top: 20px">
@@ -159,11 +156,19 @@
                   </div>
                 </el-row>
                 <el-row style="padding-top: 20px">
-                  <xing-zhen-trend-chart />
+                  <xing-zhen-trend-chart ref="average" :classname="value" />
                 </el-row>
               </el-col>
             </el-row>
             <el-row style="padding-top: 20px" />
+            <el-row style="padding-top: 20px">
+              <div class="title">
+                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率对比图-</span>
+              </div>
+            </el-row>
+            <el-row style="padding-top: 20px">
+              <xingzhen-six-rate-chart ref="six" :classname="value" />
+            </el-row>
             <el-row style="padding-top: 20px">
               <div class="title">
                 <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率表-</span>
@@ -171,14 +176,6 @@
             </el-row>
             <el-row style="padding-top: 20px">
               <in-term-six-rates-table :in-term-six-rates-data="inTermSixRatesData" :table-header="tableInfoFour" />
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <div class="title">
-                <span style="font-size: 20px;color: #2ac06d">-学期内历次成绩班级六率对比图-</span>
-              </div>
-            </el-row>
-            <el-row style="padding-top: 20px">
-              <xingzhen-six-rate-chart />
             </el-row>
           </el-tab-pane>
         </el-tabs>
@@ -196,12 +193,12 @@ import classSixRatesAna from '@/views/teacherGradeReport/classAnalyze/xingzhengb
 import subjectCompareChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/subjectCompareChart'
 import sixRateClassChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/sixRateClassChart'
 import studentsRankChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/studentsRankChart'
-import studentRankTable from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/studentRankTable'
+// import studentRankTable from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/studentRankTable'
 import inTermSixRatesTable from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/inTermSixRatesTable'
 import termGradeAverageTable from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/termGradeAverageTable'
 import xingZhenTrendChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/xingZhenTrendChart'
 import xingzhenSixRateChart from '@/views/teacherGradeReport/classAnalyze/xingzhengban/tableAndChart/xingzhenSixRateChart'
-import { getBehindClassDataBySubject, getXingZhengScoreTable } from '@/api/nianjizhurenGetData'
+import { getBehindClassDataBySubject, getXingZhengScoreTable, getClassAnalysisXingzhengSixRatesData, getClassAnalysisXingzhengGradeAverageData, getClassAnalysisXingzhengGradeSixRatesData } from '@/api/nianjizhurenGetData'
 export default {
   name: 'Xingzheng',
   components: {
@@ -213,7 +210,7 @@ export default {
     classSixRatesAna,
     subjectCompareChart,
     studentsRankChart,
-    studentRankTable,
+    // studentRankTable,
     inTermSixRatesTable,
     termGradeAverageTable,
     xingZhenTrendChart,
@@ -224,188 +221,14 @@ export default {
       subject: '语文',
       id: window.localStorage.getItem('id'),
       allGradeTableData: [],
-      allGradeSixRatesData: [{
-        kemu: '语文',
-        leibie: '行政',
-        pingjun: '76',
-        biaozhun: '70',
-        chaoju: '249',
-        chaojulv: '50%',
-        renshu: '456',
-        gaofen: '35',
-        gaofenlv: '12%',
-        youxiu: '78',
-        youxiulv: '25%',
-        lianghao: '120',
-        lianghaolv: '34%',
-        jige: '400',
-        jigelv: '84%',
-        difen: '56',
-        difenlv: '16%'
-      }, {
-        kemu: '数学',
-        leibie: '行政',
-        pingjun: '76',
-        biaozhun: '70',
-        chaoju: '249',
-        chaojulv: '50%',
-        renshu: '456',
-        gaofen: '35',
-        gaofenlv: '12%',
-        youxiu: '78',
-        youxiulv: '25%',
-        lianghao: '120',
-        lianghaolv: '34%',
-        jige: '400',
-        jigelv: '84%',
-        difen: '56',
-        difenlv: '16%'
-      }, {
-        kemu: '英语',
-        leibie: '行政',
-        pingjun: '76',
-        biaozhun: '70',
-        chaoju: '249',
-        chaojulv: '50%',
-        renshu: '456',
-        gaofen: '35',
-        gaofenlv: '12%',
-        youxiu: '78',
-        youxiulv: '25%',
-        lianghao: '120',
-        lianghaolv: '34%',
-        jige: '400',
-        jigelv: '84%',
-        difen: '56',
-        difenlv: '16%'
-      }, {
-        kemu: '物理',
-        leibie: '行政',
-        pingjun: '76',
-        biaozhun: '70',
-        chaoju: '249',
-        chaojulv: '50%',
-        renshu: '456',
-        gaofen: '35',
-        gaofenlv: '12%',
-        youxiu: '78',
-        youxiulv: '25%',
-        lianghao: '120',
-        lianghaolv: '34%',
-        jige: '400',
-        jigelv: '84%',
-        difen: '56',
-        difenlv: '16%'
-      }],
-      termAverageData: [
-        {
-          date: '2019-03-12',
-          name: '第一次月考',
-          pingjun: '78',
-          biaozhun: '67'
-        },
-        {
-          date: '2019-04-12',
-          name: '第二次月考',
-          pingjun: '78',
-          biaozhun: '67'
-        },
-        {
-          date: '2019-05-12',
-          name: '第三次月考',
-          pingjun: '78',
-          biaozhun: '67'
-        },
-        {
-          date: '2019-06-12',
-          name: '第四次月考',
-          pingjun: '78',
-          biaozhun: '67'
-        }
-      ],
-      inTermSixRatesData: [
-        {
-          date: '2019-03-12',
-          name: '第一次月考',
-          xueke: '全科',
-          biaozhun: '70',
-          chaojun: '249',
-          chaojunlv: '50%',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        },
-        {
-          date: '2019-04-12',
-          name: '第二次月考',
-          xueke: '全科',
-          biaozhun: '70',
-          chaojun: '249',
-          chaojunlv: '50%',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        },
-        {
-          date: '2019-05-12',
-          name: '第三次月考',
-          xueke: '全科',
-          biaozhun: '70',
-          chaojun: '249',
-          chaojunlv: '50%',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        },
-        {
-          date: '2019-06-12',
-          name: '第四次月考',
-          xueke: '全科',
-          biaozhun: '70',
-          chaojun: '249',
-          chaojunlv: '50%',
-          renshu: '456',
-          gaofen: '35',
-          gaofenlv: '12%',
-          youxiu: '78',
-          youxiulv: '25%',
-          lianghao: '120',
-          lianghaolv: '34%',
-          jige: '400',
-          jigelv: '84%',
-          difen: '56',
-          difenlv: '16%'
-        }
-      ],
+      allGradeSixRatesData: [],
+      termAverageData: [],
+      inTermSixRatesData: [],
       activeName: 'first',
       value: '1',
       rateValue: '',
       tableInfo: [
-        { prop: 'xuhao', lable: '序号' },
+        // { prop: 'xuhao', lable: '序号' },
         { prop: 'studentNumber', lable: '考号' },
         { prop: 'studentName', lable: '姓名' },
         { prop: 'classId', lable: '班级/行政班' },
@@ -425,47 +248,47 @@ export default {
         { prop: 'diliCoversion', lable: '政治' }
       ],
       tableInfoTwo: [
-        { prop: 'kemu', lable: '学科' },
-        { prop: 'leibie', lable: '类别' },
-        { prop: 'renshu', lable: '人数' },
-        { prop: 'pingjun', lable: '平均分' },
-        { prop: 'biaozhun', lable: '标准差' },
-        { prop: 'gaofen', lable: '高分人数' },
-        { prop: 'gaofenlv', lable: '高分率' },
-        { prop: 'youxiu', lable: '优秀人数' },
-        { prop: 'youxiulv', lable: '优秀率' },
-        { prop: 'lianghao', lable: '良好人数' },
-        { prop: 'lianghaolv', lable: '良好率' },
-        { prop: 'jige', lable: '及格人数' },
-        { prop: 'jigelv', lable: '及格率' },
-        { prop: 'difen', lable: '低分人数' },
-        { prop: 'difenlv', lable: '低分率' },
-        { prop: 'chaoju', lable: '超均人数' },
-        { prop: 'chaojulv', lable: '超均率' }
+        { prop: 'subjectname', lable: '学科' },
+        // { prop: 'leibie', lable: '类别' },
+        { prop: 'personsum', lable: '人数' },
+        { prop: 'avg', lable: '平均分' },
+        // { prop: 'StandardDiviation', lable: '标准差' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ],
       tableInfoThree: [
-        { prop: 'date', lable: '日期' },
-        { prop: 'name', lable: '考试名称' },
-        { prop: 'pingjun', lable: '平均分' },
-        { prop: 'biaozhun', lable: '标准差' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examname', lable: '考试名称' },
+        { prop: 'scoreAvg', lable: '平均分' },
+        { prop: 'StandardDiviation', lable: '标准差' }
       ],
       tableInfoFour: [
-        { prop: 'date', lable: '日期' },
-        { prop: 'name', lable: '考试名称' },
-        { prop: 'xueke', lable: '学科' },
-        { prop: 'renshu', lable: '年级人数' },
-        { prop: 'gaofen', lable: '高分人数' },
-        { prop: 'gaofenlv', lable: '高分率' },
-        { prop: 'youxiu', lable: '优秀人数' },
-        { prop: 'youxiulv', lable: '优秀率' },
-        { prop: 'lianghao', lable: '良好人数' },
-        { prop: 'lianghaolv', lable: '良好率' },
-        { prop: 'jige', lable: '及格人数' },
-        { prop: 'jigelv', lable: '及格率' },
-        { prop: 'difen', lable: '低分人数' },
-        { prop: 'difenlv', lable: '低分率' },
-        { prop: 'chaojun', lable: '超均人数' },
-        { prop: 'chaojunlv', lable: '超均率' }
+        { prop: 'examdate', lable: '日期' },
+        { prop: 'examname', lable: '考试名称' },
+        { prop: 'subjectname', lable: '学科' },
+        { prop: 'personsum', lable: '年级人数' },
+        { prop: 'highnum', lable: '高分人数' },
+        { prop: 'highnumradio', lable: '高分率' },
+        { prop: 'excellentstudents', lable: '优秀人数' },
+        { prop: 'excellentratio', lable: '优秀率' },
+        { prop: 'goodnumbers', lable: '良好人数' },
+        { prop: 'goodratio', lable: '良好率' },
+        { prop: 'passnumbers', lable: '及格人数' },
+        { prop: 'passratio', lable: '及格率' },
+        { prop: 'failnum', lable: '低分人数' },
+        { prop: 'failratio', lable: '低分率' },
+        { prop: 'beyondnum', lable: '超均人数' },
+        { prop: 'beyondradio', lable: '超均率' }
       ],
       options: [],
       optionsTwo: [
@@ -495,6 +318,9 @@ export default {
     this.firstGetClass()
     setTimeout(() => {
       this.getScoreTable()
+      this.getSixRates()
+      this.getLiciAverage()
+      this.getLiciSixRates()
     }, 1000)
   },
   methods: {
@@ -531,8 +357,55 @@ export default {
         this.allGradeTableData = response.data.info
       })
     },
-    getScoreTableData: function() {
+    getSixRates: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.value
+      }
+      getClassAnalysisXingzhengSixRatesData(prams).then(response => {
+        console.log('测试年级主任行政班校对比六率的数据')
+        console.log(response.data)
+        this.allGradeSixRatesData = []
+        this.allGradeSixRatesData.push(response.data.info[1])
+        this.allGradeSixRatesData.push(response.data.info[3])
+        this.allGradeSixRatesData.push(response.data.info[5])
+      })
+    },
+    getLiciAverage: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.value
+      }
+      getClassAnalysisXingzhengGradeAverageData(prams).then(response => {
+        console.log('测试年级主任行政班历次平均分的数据')
+        console.log(response.data)
+        this.termAverageData = response.data.info
+      })
+    },
+    getLiciSixRates: function() {
+      const prams = {
+        userID: this.id,
+        classname: this.value
+      }
+      getClassAnalysisXingzhengGradeSixRatesData(prams).then(response => {
+        console.log('测试年级主任行政班历次六率的数据')
+        console.log(response.data)
+        this.inTermSixRatesData = response.data.info
+      })
+    },
+    changeData: function() {
       this.getScoreTable()
+      this.getSixRates()
+      this.getLiciSixRates()
+      this.getLiciAverage()
+      this.$refs.important.getFiveData()
+      // this.$refs.studenttable.firstInitTabletByData()
+      setTimeout(() => {
+        this.$refs.frontn.getChartData()
+        this.$refs.student.firstInitChartByData()
+        this.$refs.average.getData()
+        this.$refs.six.getData()
+      }, 1000)
     },
     sortData: function(a, b) {
       return a - b

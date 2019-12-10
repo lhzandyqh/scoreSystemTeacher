@@ -2,6 +2,7 @@
   <div class="tablecontainer">
     <el-table
       v-loading="loading"
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :data="inTermSixRatesData"
       align="center"
       border

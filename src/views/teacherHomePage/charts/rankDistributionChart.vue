@@ -17,7 +17,7 @@
                 />
               </el-select>
             </el-col>
-            <el-col :span="4">
+            <el-col :span="4" :offset="2">
               <el-select v-model="value" placeholder="请选择班级" @change="changeDataToInitChart">
                 <el-option
                   v-for="item in options"

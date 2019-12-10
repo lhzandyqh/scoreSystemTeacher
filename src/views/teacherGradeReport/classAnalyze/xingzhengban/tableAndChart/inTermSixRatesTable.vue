@@ -1,10 +1,10 @@
 <template>
   <div class="tablecontainer">
     <el-table
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :data="inTermSixRatesData"
       align="center"
       border
-      height="300"
       style="width: 100%;margin-top:10px;"
     >
       <el-table-column
